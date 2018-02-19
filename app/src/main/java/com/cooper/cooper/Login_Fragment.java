@@ -37,10 +37,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
     private static LinearLayout loginLayout;
     private static Animation shakeAnimation;
     private static FragmentManager fragmentManager;
-
-    public Login_Fragment() {
-
-    }
+    private HttpHandler api;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,6 +45,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
         view = inflater.inflate(R.layout.login_layout, container, false);
         initViews();
         setListeners();
+        this.api = new HttpHandler();
         return view;
     }
 
@@ -68,24 +66,10 @@ public class Login_Fragment extends Fragment implements OnClickListener {
         shakeAnimation = AnimationUtils.loadAnimation(getActivity(),
                 R.anim.shake_animation);
 
-        // Setting text selector over textviews
-        XmlResourceParser xrp = getResources().getXml(R.drawable.text_selector);
-        try {
-            ColorStateList csl = ColorStateList.createFromXml(getResources(),
-                    xrp);
-            signUp.setTextColor(Color.WHITE);
-            show_hide_password.setTextColor(Color.WHITE);
-            forgotPassword.setTextColor(Color.WHITE);
-            /*
-            forgotPassword.setTextColor(csl);
-            show_hide_password.setTextColor(csl);
-            signUp.setTextColor(csl);*/
-        } catch (Exception e) {
-            signUp.setTextColor(Color.WHITE);
-            show_hide_password.setTextColor(Color.WHITE);
-            forgotPassword.setTextColor(Color.WHITE);
-            Log.d("BUGS", e.toString());
-        }
+
+        signUp.setTextColor(Color.WHITE);
+        show_hide_password.setTextColor(Color.WHITE);
+        forgotPassword.setTextColor(Color.WHITE);
     }
 
     // Set Listeners
@@ -110,7 +94,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                             // checkbox
                             // text
 
-                            password.setInputType(InputType.TYPE_CLASS_TEXT);
+                            //password.setInputType(InputType.TYPE_CLASS_TEXT);
                             password.setTransformationMethod(HideReturnsTransformationMethod
                                     .getInstance());// show password
                         } else {
@@ -118,8 +102,8 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                             // checkbox
                             // text
 
-                            password.setInputType(InputType.TYPE_CLASS_TEXT
-                                    | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                            //.setInputType(InputType.TYPE_CLASS_TEXT
+                             //       | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                             password.setTransformationMethod(PasswordTransformationMethod
                                     .getInstance());// hide password
 
@@ -134,6 +118,8 @@ public class Login_Fragment extends Fragment implements OnClickListener {
         switch (v.getId()) {
             case R.id.loginBtn:
                 checkValidation();
+                this.api.execute("hermes.espinola@gmail.com", "password");
+                //Log.d("LOGIN HTTP", response);
                 break;
 
             case R.id.forgot_password:

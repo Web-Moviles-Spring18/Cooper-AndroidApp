@@ -43,22 +43,8 @@ public class ForgotPassword_Fragment extends Fragment implements
         submit = (TextView) view.findViewById(R.id.forgot_button);
         back = (TextView) view.findViewById(R.id.backToLoginBtn);
 
-        // Setting text selector over textviews
-        XmlResourceParser xrp = getResources().getXml(R.drawable.text_selector);
-        try {
-            ColorStateList csl = ColorStateList.createFromXml(getResources(),
-                    xrp);
-
-            /*back.setTextColor(csl);
-            submit.setTextColor(csl);*/
-
-            back.setTextColor(Color.WHITE);
-            submit.setTextColor(Color.WHITE);
-
-        } catch (Exception e) {
-            back.setTextColor(Color.WHITE);
-            submit.setTextColor(Color.WHITE);
-        }
+        back.setTextColor(Color.WHITE);
+        submit.setTextColor(Color.WHITE);
 
     }
 

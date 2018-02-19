@@ -2,8 +2,6 @@ package com.cooper.cooper;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import android.content.res.ColorStateList;
-import android.content.res.XmlResourceParser;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -19,8 +17,8 @@ import android.widget.Toast;
 
 public class SignUp_Fragment extends Fragment implements OnClickListener {
     private static View view;
-    private static EditText fullName, emailId, mobileNumber, location,
-            password, confirmPassword;
+    private static EditText fullName, emailId,
+                            password, confirmPassword;
     private static TextView login;
     private static Button signUpButton;
     private static CheckBox terms_conditions;
@@ -48,22 +46,8 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
         login = (TextView) view.findViewById(R.id.already_user);
         terms_conditions = (CheckBox) view.findViewById(R.id.terms_conditions);
 
-        // Setting text selector over textviews
-        XmlResourceParser xrp = getResources().getXml(R.drawable.text_selector);
-        try {
-            ColorStateList csl = ColorStateList.createFromXml(getResources(),
-                    xrp);
-
-            /*login.setTextColor(csl);
-            terms_conditions.setTextColor(csl);*/
-
-            login.setTextColor(Color.WHITE);
-            terms_conditions.setTextColor(Color.WHITE);
-
-        } catch (Exception e) {
-            login.setTextColor(Color.WHITE);
-            terms_conditions.setTextColor(Color.WHITE);
-        }
+        login.setTextColor(Color.WHITE);
+        terms_conditions.setTextColor(Color.WHITE);
     }
 
     // Set Listeners
@@ -76,13 +60,10 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.signUpBtn:
-
                 // Call checkValidation method
                 checkValidation();
                 break;
-
             case R.id.already_user:
-
                 // Replace login fragment
                 new MainActivity().replaceLoginFragment();
                 break;
@@ -96,8 +77,6 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
         // Get all edittext texts
         String getFullName = fullName.getText().toString();
         String getEmailId = emailId.getText().toString();
-        String getMobileNumber = mobileNumber.getText().toString();
-        String getLocation = location.getText().toString();
         String getPassword = password.getText().toString();
         String getConfirmPassword = confirmPassword.getText().toString();
 
@@ -108,8 +87,6 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
         // Check if all strings are null or not
         if (getFullName.equals("") || getFullName.length() == 0
                 || getEmailId.equals("") || getEmailId.length() == 0
-                || getMobileNumber.equals("") || getMobileNumber.length() == 0
-                || getLocation.equals("") || getLocation.length() == 0
                 || getPassword.equals("") || getPassword.length() == 0
                 || getConfirmPassword.equals("")
                 || getConfirmPassword.length() == 0)
