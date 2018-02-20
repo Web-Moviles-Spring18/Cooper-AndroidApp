@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    // Replace Login Fragment with animation
+    // Replace PostRequests Fragment with animation
     protected void replaceLoginFragment() {
         fragmentManager
                 .beginTransaction()
