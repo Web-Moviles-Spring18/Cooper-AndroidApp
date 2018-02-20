@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/pool_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="53dp"
+        android:hint="Pool Name"
+        android:textColor="@color/white"
+        android:textSize="36sp"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:id="@+id/members"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/pool_name"
+        android:layout_below="@+id/pool_name"
+        android:layout_marginTop="13dp"
+        android:hint="Members"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/quantity_members"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/members"
+        android:layout_alignBottom="@+id/members"
+        android:layout_marginStart="15dp"
+        android:layout_toEndOf="@+id/members"
+        android:hint="0"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/pool_name"
+        android:layout_alignBottom="@+id/pool_name"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="19dp"
+        android:hint="Amount"
+        android:textColor="@color/white"
+        android:textSize="24sp" />
+
+</RelativeLayout>
