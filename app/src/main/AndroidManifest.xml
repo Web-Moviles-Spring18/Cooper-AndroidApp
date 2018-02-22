@@ -34,6 +34,8 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
+        <activity android:name=".CreatePool" />
+        <activity android:name=".PoolDetails"></activity>
     </application>
 
 </manifest>

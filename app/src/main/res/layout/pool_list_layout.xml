@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.cooper.cooper.MainMenu"
+    tools:context="com.cooper.cooper.PoolLists"
     android:background="@color/background_color">
 
 
@@ -16,7 +16,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginEnd="15dp"
         android:layout_marginTop="17dp"
-        android:src="@android:drawable/ic_menu_add" />
+        android:src="@android:drawable/ic_menu_add"
+        android:onClick="createPool"/>
 
     <ListView
         android:id="@+id/list_pools"

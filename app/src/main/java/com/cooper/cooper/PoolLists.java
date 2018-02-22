@@ -1,5 +1,6 @@
 package com.cooper.cooper;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -32,7 +33,7 @@ public class PoolLists extends AppCompatActivity {
         this.pool_list.add(new Pool("Bitches", 1000, true, "cash", "usd", "20/03/2018", "27/03/2018", members));
         this.pool_list.add(new Pool("Bitches", 1000, true, "cash", "usd", "20/03/2018", "27/03/2018", members));
         this.pool_list.add(new Pool("Bitches", 1000, true, "cash", "usd", "20/03/2018", "27/03/2018", members));this.pool_list.add(new Pool("Bitches", 1000, true, "cash", "usd", "20/03/2018", "27/03/2018", members));
-        
+
 
 
         PoolListAdapter poolAdapter = new PoolListAdapter(pool_list, this);
@@ -40,6 +41,7 @@ public class PoolLists extends AppCompatActivity {
     }
 
     public void createPool(View v){
-
+        Intent intent = new Intent(this,CreatePool.class);
+        this.startActivity(intent);
     }
 }

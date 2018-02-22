@@ -1,5 +1,8 @@
 package com.cooper.cooper;
 
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -16,6 +19,7 @@ public class Pool {
     private String start_date;
     private String end_date;
     private ArrayList<String> members;
+    private int id;
 
     public Pool(String name, double total, boolean is_private, String payment_method, String currency, String start_date, String end_date, ArrayList<String> members) {
         this.name = name;
@@ -94,5 +98,29 @@ public class Pool {
 
     public int getQuantityMember(){
         return this.members.size();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public JSONObject poolJSON() throws Exception {
+
+
+        JSONObject pool_json = new JSONObject();
+        pool_json.put("name", this.name);
+        pool_json.put("totalAmount", this.total);
+        pool_json.put("private", this.is_private);
+        pool_json.put("paymentMethod", this.payment_method);
+        pool_json.put("currency", this.currency);
+
+
+
+
+        return pool_json;
     }
 }
