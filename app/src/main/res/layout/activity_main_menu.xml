@@ -10,11 +10,12 @@
     <ImageButton
         android:id="@+id/createPoolButton"
         android:layout_width="120dip"
-        android:background="@drawable/roundcorner"
         android:layout_height="120dip"
         android:layout_alignParentStart="true"
         android:layout_alignTop="@+id/createEventButton"
         android:layout_marginStart="55dp"
+        android:background="@drawable/roundcorner"
+        android:onClick="poolSection"
         android:scaleType="fitXY"
         app:srcCompat="@drawable/mm_create_pool_button" />
 

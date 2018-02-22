@@ -28,11 +28,12 @@
             android:name=".PoolLists"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_pool_lists"
-            android:theme="@style/FullscreenTheme"></activity>
+            android:theme="@style/FullscreenTheme" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
     </application>
 
 </manifest>

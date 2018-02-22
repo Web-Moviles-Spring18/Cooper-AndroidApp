@@ -15,5 +15,5 @@ public class Utils {
     public static final String ForgotPassword_Fragment = "ForgotPassword_Fragment";
 
 
-    public static final String URL = "http://10.43.96.192:3000";
+    public static final String URL = "http://10.43.62.141:3000";
 }
