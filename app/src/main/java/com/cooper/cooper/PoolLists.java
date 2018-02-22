@@ -4,11 +4,12 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class PoolLists extends AppCompatActivity {
+public class PoolLists extends AppCompatActivity implements AdapterView.OnItemClickListener{
 
     private ArrayList<Pool> pool_list;
     private ListView listview_pools;
@@ -17,7 +18,7 @@ public class PoolLists extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.pool_list_layout);
+        setContentView(R.layout.activity_pool_list);
 
         this.listview_pools = (ListView) findViewById(R.id.list_pools);
 
@@ -38,10 +39,18 @@ public class PoolLists extends AppCompatActivity {
 
         PoolListAdapter poolAdapter = new PoolListAdapter(pool_list, this);
         listview_pools.setAdapter(poolAdapter);
+        listview_pools.setOnItemClickListener(this);
     }
 
     public void createPool(View v){
-        Intent intent = new Intent(this,CreatePool.class);
+        Intent intent = new Intent(this, CreatePool.class);
+        this.startActivity(intent);
+    }
+
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        Intent intent = new Intent(this, PoolDetails.class);
         this.startActivity(intent);
     }
 }
