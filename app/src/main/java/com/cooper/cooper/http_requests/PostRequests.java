@@ -49,7 +49,7 @@ import java.util.Map;
  * Created by marco on 18/02/2018.
  */
 
-public class PostRequests extends AsyncTask<String, String, String> {
+public class PostRequests extends AsyncTask<String, String, JSONObject> {
 
     private URL url;
     private JSONObject postData;
@@ -72,7 +72,7 @@ public class PostRequests extends AsyncTask<String, String, String> {
     }
 
     @Override
-    protected String doInBackground(String... strings) {
+    protected JSONObject doInBackground(String... strings) {
         try {
             // This is getting the url from the string we passed in
             URL url = new URL(strings[0]);
