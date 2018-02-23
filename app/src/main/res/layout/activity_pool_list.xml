@@ -16,8 +16,9 @@
         android:layout_alignParentTop="true"
         android:layout_marginEnd="15dp"
         android:layout_marginTop="17dp"
-        android:src="@android:drawable/ic_menu_add"
-        android:onClick="createPool"/>
+        android:background="@color/white"
+        android:onClick="createPool"
+        android:src="@android:drawable/ic_menu_add" />
 
     <ListView
         android:id="@+id/list_pools"
@@ -36,6 +37,7 @@
         android:layout_marginStart="25dp"
         android:fontFamily="@font/roboto_mono_medium"
         android:text="Pools"
+        android:textColor="@color/white"
         android:textSize="36sp"
         android:textStyle="bold" />
 </RelativeLayout>

@@ -11,9 +11,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_cooper_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_cooper_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
@@ -35,7 +35,8 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity android:name=".CreatePool" />
-        <activity android:name=".PoolDetails"></activity>
+        <activity android:name=".PoolDetails" />
+        <activity android:name=".Invite_toPool"></activity>
     </application>
 
 </manifest>

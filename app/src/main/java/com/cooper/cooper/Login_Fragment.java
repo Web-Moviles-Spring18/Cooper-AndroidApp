@@ -40,7 +40,6 @@ public class Login_Fragment extends Fragment implements OnClickListener {
     private  LinearLayout loginLayout;
     private  Animation shakeAnimation;
     private  FragmentManager fragmentManager;
-    private HttpHandler api;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

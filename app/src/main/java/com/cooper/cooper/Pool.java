@@ -18,10 +18,10 @@ public class Pool {
     private String currency;
     private String start_date;
     private String end_date;
-    private ArrayList<String> members;
     private int id;
+    private String invitation_code;
 
-    public Pool(String name, double total, boolean is_private, String payment_method, String currency, String start_date, String end_date, ArrayList<String> members) {
+    public Pool(String name, double total, boolean is_private, String payment_method, String currency, String start_date, String end_date) {
         this.name = name;
         this.total = total;
         this.is_private = is_private;
@@ -29,7 +29,18 @@ public class Pool {
         this.currency = currency;
         this.start_date = start_date;
         this.end_date = end_date;
-        this.members = members;
+    }
+
+    public Pool() {
+
+    }
+
+    public String getInvitation_code() {
+        return invitation_code;
+    }
+
+    public void setInvitation_code(String invitation_code) {
+        this.invitation_code = invitation_code;
     }
 
     public String getName() {
@@ -88,18 +99,6 @@ public class Pool {
         this.end_date = end_date;
     }
 
-    public ArrayList<String> getMembers() {
-        return members;
-    }
-
-    public void setMembers(ArrayList<String> members) {
-        this.members = members;
-    }
-
-    public int getQuantityMember(){
-        return this.members.size();
-    }
-
     public int getId() {
         return id;
     }
@@ -113,7 +112,7 @@ public class Pool {
 
         JSONObject pool_json = new JSONObject();
         pool_json.put("name", this.name);
-        pool_json.put("totalAmount", this.total);
+        pool_json.put("total", this.total);
         pool_json.put("private", this.is_private);
         pool_json.put("paymentMethod", this.payment_method);
         pool_json.put("currency", this.currency);

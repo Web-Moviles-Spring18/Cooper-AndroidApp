@@ -30,12 +30,12 @@ public class PoolListAdapter extends BaseAdapter{
 
     @Override
     public Object getItem(int i) {
-        return i;
+        return this.pools.get(i);
     }
 
     @Override
     public long getItemId(int i) {
-        return i;
+        return this.pools.get(i).getId();
     }
 
     @Override
@@ -51,12 +51,10 @@ public class PoolListAdapter extends BaseAdapter{
 
         TextView name = (TextView) view.findViewById(R.id.pool_name);
         TextView amount = (TextView) view.findViewById(R.id.amount);
-        TextView quantity_members = (TextView) view.findViewById(R.id.quantity_members);
 
         Pool currentPool = pools.get(i);
         name.setText(currentPool.getName());
-        amount.setText(currentPool.getTotal() + "");
-        quantity_members.setText(currentPool.getQuantityMember() + "");
+        amount.setText("$" + currentPool.getTotal());
 
         return view;
     }

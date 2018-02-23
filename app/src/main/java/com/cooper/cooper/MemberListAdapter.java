@@ -6,6 +6,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,9 +18,9 @@ import java.util.List;
 public class MemberListAdapter extends BaseAdapter{
 
     private Activity activity;
-    private ArrayList<String> members;
+    private ArrayList<JSONObject> members;
 
-    public MemberListAdapter(ArrayList<String> members, Activity activity) {
+    public MemberListAdapter(ArrayList<JSONObject> members, Activity activity) {
         this.activity = activity;
         this.members = members;
     }
@@ -46,9 +48,14 @@ public class MemberListAdapter extends BaseAdapter{
 
         TextView name = (TextView) view.findViewById(R.id.member_name);
         TextView amount = (TextView) view.findViewById(R.id.pending);
+        try {
+            name.setText(this.members.get(i).getString("name")+"");
+            amount.setText("Pending $"+this.members.get(i).getString("amount"));
+        } catch (Exception e) {
+            name.setText("Not Founded");
+            amount.setText("Pending $0.00");
+        }
 
-        name.setText(this.members.get(i)+"");
-        amount.setText("$430");
 
         return view;
     }

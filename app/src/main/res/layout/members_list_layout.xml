@@ -23,9 +23,21 @@
         android:id="@+id/pending"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/member_name"
+        android:layout_marginEnd="27dp"
+        android:layout_marginTop="11dp"
+        android:hint="Pending"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/paid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/member_name"
         android:layout_alignBottom="@+id/member_name"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="30dp"
-        android:hint="Pending" />
+        android:layout_alignEnd="@+id/pending"
+        android:hint="Paid"
+        android:text="Paid $0.00"
+        android:textColor="@color/white" />
 </RelativeLayout>

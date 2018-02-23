@@ -59,7 +59,7 @@ public class CreatePool extends AppCompatActivity {
             }
             JSONObject create_pool_json = new JSONObject();
             create_pool_json.put("name", this.pool_name.getText().toString());
-            create_pool_json.put("totalAmount", amount);
+            create_pool_json.put("total", amount);
             create_pool_json.put("private", this.isPrivate.isChecked());
             create_pool_json.put("paymentMethod", payment);
             create_pool_json.put("currency", "mxn");

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@color/background_color"
     tools:context="com.cooper.cooper.PoolDetails">
 
@@ -30,16 +30,16 @@
         android:layout_marginEnd="15dp"
         android:hint="Amount"
         android:textColor="@color/white"
-        android:textSize="36sp"
+        android:textSize="30sp"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/payment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/amount"
-        android:layout_below="@+id/amount"
-        android:layout_marginTop="16dp"
+        android:layout_below="@+id/name"
+        android:layout_marginTop="15dp"
+        android:layout_toEndOf="@+id/name"
         android:hint="Payment Method"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -48,9 +48,11 @@
         android:id="@+id/pending"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/payment"
+        android:layout_alignBottom="@+id/payment"
         android:layout_alignStart="@+id/name"
-        android:layout_alignTop="@+id/payment"
         android:hint="Pending"
+        android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -58,18 +60,12 @@
         android:id="@+id/paid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/pending"
-        android:layout_alignEnd="@+id/name"
+        android:layout_alignStart="@+id/pending"
+        android:layout_below="@+id/pending"
         android:hint="Paid"
+        android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold" />
-
-    <ListView
-        android:id="@+id/members"
-        android:layout_width="match_parent"
-        android:layout_height="360dp"
-        android:layout_below="@+id/payment"
-        android:layout_centerHorizontal="true" />
 
     <Button
         android:id="@+id/invite"
@@ -77,13 +73,21 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/members"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="26dp"
         android:background="@drawable/loginbutton_selector"
+        android:onClick="goToInvitePool"
         android:padding="3dp"
         android:text="Invitar"
         android:textColor="@color/background_color"
         android:textSize="17sp"
         android:textStyle="bold" />
+
+    <ListView
+        android:id="@+id/members"
+        android:layout_width="match_parent"
+        android:layout_height="360dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/payment"
+        android:layout_marginTop="35dp" />
 
 
 </RelativeLayout>

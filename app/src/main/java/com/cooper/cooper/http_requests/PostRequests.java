@@ -6,6 +6,7 @@ package com.cooper.cooper.http_requests;
 
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.cooper.cooper.CustomToast;
@@ -18,6 +19,8 @@ import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.net.CookieManager;
+import java.net.HttpCookie;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
@@ -43,6 +46,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -54,6 +58,8 @@ public class PostRequests extends AsyncTask<String, String, JSONObject> {
     private JSONObject postData;
     private Context context;
     private View view;
+    static final String COOKIES_HEADER = "Set-Cookie";
+    static android.webkit.CookieManager CookieManager = android.webkit.CookieManager.getInstance();
 
     public PostRequests(JSONObject postData, Context context) {
         if (postData != null) {
@@ -79,11 +85,24 @@ public class PostRequests extends AsyncTask<String, String, JSONObject> {
     @Override
     protected JSONObject doInBackground(String... strings) {
         try {
+            boolean isLogin = strings[0].contains("login");
+            boolean isSignUp = strings[0].contains("signup");
             // This is getting the url from the string we passed in
             URL url = new URL(strings[0]);
-
             // Create the urlConnection
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+
+
+           /* String myCookie = "cooper.sid";
+            urlConnection.setRequestProperty("Cookie", myCookie);*/
+             String cookie_str = CookieManager.getCookie(strings[0]);
+            if (CookieManager.hasCookies() && cookie_str != null) {
+                // While joining the Cookies, use ',' or ';' as needed. Most of the servers are using ';'
+                urlConnection.setRequestProperty("Cookie", cookie_str);
+            }
+
+
+            /**/
             urlConnection.setDoInput(true);
             urlConnection.setDoOutput(true);
             urlConnection.setRequestProperty("Content-Type", "application/json");
@@ -116,14 +135,24 @@ public class PostRequests extends AsyncTask<String, String, JSONObject> {
                 // Status code is not 200
                 // Do something to handle the error
             }
+            if(isLogin || isSignUp) {
 
+                Map<String, List<String>> headerFields = urlConnection.getHeaderFields();
+                List<String> cookiesHeader = headerFields.get(COOKIES_HEADER);
+                if (cookiesHeader != null) {
+                    for (String cookie : cookiesHeader) {
+                        CookieManager.setCookie(strings[0], cookie);
+                        //CookieManager.getCookieStore().add(null, HttpCookie.parse(cookie).get(0));
+                    }
+                }
+            }
             JSONObject response = new JSONObject();
             response.put("status_code", statusCode);
             response.put("response", response_body.toString());
             return response;
 
         } catch (Exception e) {
-            Log.d("Error", e.toString());
+            e.printStackTrace();
         }
         return null;
     }
