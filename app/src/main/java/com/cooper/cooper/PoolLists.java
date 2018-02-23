@@ -3,9 +3,14 @@ package com.cooper.cooper;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
+import com.cooper.cooper.http_requests.GetRequests;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -19,6 +24,35 @@ public class PoolLists extends AppCompatActivity implements AdapterView.OnItemCl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pool_list);
+
+        try {
+            GetRequests get_pool_list = new GetRequests();
+            get_pool_list.execute("http://services.groupkt.com/country/get/all");
+
+            JSONObject response = get_pool_list.get();
+            JSONObject data = new JSONObject("[\n" +
+                    "    {\n" +
+                    "        \"relation\": {\n" +
+                    "            \"identity\": 63,\n" +
+                    "            \"start\": 41,\n" +
+                    "            \"end\": 61,\n" +
+                    "            \"type\": \"participatesIn\",\n" +
+                    "            \"properties\": {}\n" +
+                    "        },\n" +
+                    "        \"node\": {\n" +
+                    "            \"label\": \"Pool\",\n" +
+                    "            \"name\": \"Barezito\",\n" +
+                    "            \"paymentMethod\": \"cash\",\n" +
+                    "            \"private\": true,\n" +
+                    "            \"currency\": \"mxn\",\n" +
+                    "            \"ends\": \"2018-02-23T07:02:09.000Z\"\n" +
+                    "        }\n" +
+                    "    }]");
+            Log.d("response get pool list", data.toString());
+        } catch (Exception e) {
+            Log.d("Get Pool List Error", e.toString());
+        }
+
 
         this.listview_pools = (ListView) findViewById(R.id.list_pools);
 

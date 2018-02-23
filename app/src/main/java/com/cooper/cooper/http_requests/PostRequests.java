@@ -51,9 +51,7 @@ import java.util.Map;
 
 public class PostRequests extends AsyncTask<String, String, JSONObject> {
 
-    private URL url;
     private JSONObject postData;
-    private int statusCode;
     private Context context;
     private View view;
 
@@ -63,6 +61,13 @@ public class PostRequests extends AsyncTask<String, String, JSONObject> {
         }
         this.context = context;
     }
+
+    public PostRequests(JSONObject postData) {
+        if (postData != null) {
+            this.postData = postData;
+        }
+    }
+
     public PostRequests(JSONObject postData, Context context, View view) {
         if (postData != null) {
             this.postData = postData;
@@ -95,44 +100,42 @@ public class PostRequests extends AsyncTask<String, String, JSONObject> {
                 writer.close();
             }
 
-            this.statusCode = urlConnection.getResponseCode();
-
-            if (this.statusCode ==  200) {
+            int statusCode = urlConnection.getResponseCode();
+            StringBuilder response_body = new StringBuilder();
+            if (statusCode ==  200) {
                 BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
                 String inputLine;
-                StringBuilder response_body = new StringBuilder();
+
                 while ((inputLine = in.readLine()) != null) {
                     response_body.append(inputLine);
                 }
                 Log.d("Response", response_body.toString());
                 in.close();
-
-                // From here you can convert the string to JSON with whatever JSON parser you like to use
-
-                // After converting the string to JSON, I call my custom callback. You can follow this process too, or you can implement the onPostExecute(Result) method
-
             } else {
+                response_body.append("Error, try later!");
                 // Status code is not 200
                 // Do something to handle the error
             }
-            return this.statusCode+"";
+
+            JSONObject response = new JSONObject();
+            response.put("status_code", statusCode);
+            response.put("response", response_body.toString());
+            return response;
+
         } catch (Exception e) {
             Log.d("Error", e.toString());
         }
         return null;
     }
 
-    public int getStatusCode() {
-        return this.statusCode;
-    }
 
     protected void onPostExecute(String result) {
-        if(result.equals("200")) {
+        /*if(result.equals("200")) {
             Intent intent = new Intent(this.context,MainMenu.class);
             this.context.startActivity(intent);
         } else {
             new CustomToast().Show_Toast(this.context, this.view, result);
-        }
+        }*/
         //Toast.makeText(this.context, result, Toast.LENGTH_SHORT).show();
     }
 

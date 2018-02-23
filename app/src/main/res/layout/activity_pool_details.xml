@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.cooper.cooper.PoolDetails"
-    android:background="@color/background_color">
+    android:layout_height="wrap_content"
+    android:background="@color/background_color"
+    tools:context="com.cooper.cooper.PoolDetails">
 
     <TextView
         android:id="@+id/name"
@@ -67,9 +67,23 @@
     <ListView
         android:id="@+id/members"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
+        android:layout_height="360dp"
         android:layout_below="@+id/payment"
-        android:layout_marginTop="23dp" />
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/invite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/members"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="26dp"
+        android:background="@drawable/loginbutton_selector"
+        android:padding="3dp"
+        android:text="Invitar"
+        android:textColor="@color/background_color"
+        android:textSize="17sp"
+        android:textStyle="bold" />
+
 
 </RelativeLayout>

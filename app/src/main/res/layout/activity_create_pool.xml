@@ -20,7 +20,7 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/fullName"
+        android:id="@+id/pool_name"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -42,7 +42,7 @@
         android:background="@color/white_greyish" />
 
     <EditText
-        android:id="@+id/userEmailId"
+        android:id="@+id/pool_amount"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -108,7 +108,7 @@
         android:background="@color/white_greyish" />
 
     <EditText
-        android:id="@+id/password"
+        android:id="@+id/start_date"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -130,7 +130,7 @@
         android:background="@color/white_greyish" />
 
     <EditText
-        android:id="@+id/confirmPassword"
+        android:id="@+id/end_date"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -206,6 +206,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:background="@drawable/loginbutton_selector"
+        android:onClick="createPool"
         android:padding="3dp"
         android:text="create pool"
         android:textColor="@color/background_color"

@@ -3,6 +3,7 @@ package com.cooper.cooper;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -105,10 +106,21 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                         login_json.put("email", email);
                         login_json.put("password", password);
 
-                        PostRequests login_request = new PostRequests(login_json, getActivity(), v);
+
+                        PostRequests login_request = new PostRequests(login_json);
                         login_request.execute(Utils.URL + "/login");
 
+                        JSONObject response = login_request.get();
+                        int response_status_code = response.getInt("status_code");
+                        Log.d("status_code", response_status_code+"");
+                        if(response_status_code == 200) {
+                            Intent intent = new Intent(getActivity(), MainMenu.class);
+                            this.startActivity(intent);
+                        } else {
+                            new CustomToast().Show_Toast(getActivity(), v, response.getString("response"));
+                        }
                     } catch (Exception e) {
+                        new CustomToast().Show_Toast(getActivity(), v, "Error");
                         Log.d("LoginError", e.toString());
                     }
                 }
