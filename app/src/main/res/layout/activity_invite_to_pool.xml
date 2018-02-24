@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context="com.cooper.cooper.Invite_toPool"
+    android:background="@color/background_color">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Please enter the Email "
+            android:textColor="@color/white_greyish"
+            android:textSize="17sp" />
+
+        <EditText
+            android:id="@+id/send_email"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:singleLine="true"
+            android:background="@android:color/transparent"
+            android:drawableLeft="@drawable/email"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textSize="16sp" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:background="@color/white_greyish" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp" >
+
+        </RelativeLayout>
+
+
+    <Button
+        android:id="@+id/send"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:background="@drawable/loginbutton_selector"
+        android:onClick="sendInvitation"
+        android:padding="3dp"
+        android:text="Send"
+        android:textColor="@color/background_color"
+        android:textSize="17sp"
+        android:textStyle="bold" />
+
+</LinearLayout>

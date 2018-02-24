@@ -63,7 +63,7 @@ public class ForgotPassword_Fragment extends Fragment implements
 		switch (v.getId()) {
 		case R.id.backToLoginBtn:
 
-			// Replace Login Fragment on Back Presses
+			// Replace PostRequests Fragment on Back Presses
 			new MainActivity().replaceLoginFragment();
 			break;
 
