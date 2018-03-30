@@ -51,8 +51,6 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
         login = (TextView) view.findViewById(R.id.already_user);
         terms_conditions = (CheckBox) view.findViewById(R.id.terms_conditions);
 
-        login.setTextColor(Color.WHITE);
-        terms_conditions.setTextColor(Color.WHITE);
     }
 
     // Set Listeners

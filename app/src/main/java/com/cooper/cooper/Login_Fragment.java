@@ -1,9 +1,12 @@
 package com.cooper.cooper;
 
+import java.net.HttpURLConnection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -24,50 +27,53 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.cooper.cooper.http_requests.HTTPRequestListener;
+import com.cooper.cooper.http_requests.LoginRequest;
 import com.cooper.cooper.http_requests.PostRequests;
 
 import org.json.JSONObject;
 
-public class Login_Fragment extends Fragment implements OnClickListener {
+public class Login_Fragment extends Fragment implements OnClickListener, HTTPRequestListener {
 
-    private  View view;
-    private  EditText emailid, password;
-    private  Button loginButton;
-    private  TextView forgotPassword, signUp;
-    private  CheckBox show_hide_password;
-    private  LinearLayout loginLayout;
-    private  Animation shakeAnimation;
-    private  FragmentManager fragmentManager;
+    private View view;
+    private EditText emailid, password;
+    private Button loginButton;
+    private TextView forgotPassword, signUp;
+    private CheckBox show_hide_password;
+    private LinearLayout loginLayout;
+    private ProgressBar loadingOption;
+    private Animation shakeAnimation;
+    private FragmentManager fragmentManager;
+    private SharedPreferences sharedPreferences;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         this.view = inflater.inflate(R.layout.login_layout, container, false);
+        this.sharedPreferences = this.getActivity().getSharedPreferences("login", Context.MODE_PRIVATE);
         this.initViews();
         this.setListeners();
-        return view;
+        return this.view;
     }
 
     // Initiate Views
     private void initViews() {
-        this.fragmentManager = getActivity().getSupportFragmentManager();
-        this.emailid    = (EditText) view.findViewById(R.id.login_emailid);
-        this.password   = (EditText) view.findViewById(R.id.login_password);
-        this.loginButton = (Button) view.findViewById(R.id.loginBtn);
-        this.forgotPassword  = (TextView) view.findViewById(R.id.forgot_password);
-        this.signUp = (TextView) view.findViewById(R.id.createAccount);
+        this.fragmentManager    = getActivity().getSupportFragmentManager();
+        this.loadingOption      = (ProgressBar) view.findViewById(R.id.loadingPanel);
+        this.emailid            = (EditText) view.findViewById(R.id.login_emailid);
+        this.password           = (EditText) view.findViewById(R.id.login_password);
+        this.loginButton        = (Button) view.findViewById(R.id.loginBtn);
+        this.forgotPassword     = (TextView) view.findViewById(R.id.forgot_password);
+        this.signUp             = (TextView) view.findViewById(R.id.createAccount);
         this.show_hide_password = (CheckBox) view.findViewById(R.id.show_hide_password);
-        this.loginLayout = (LinearLayout) view.findViewById(R.id.login_layout);
-
+        this.loginLayout        = (LinearLayout) view.findViewById(R.id.login_layout);
+        this.loadingOption.setVisibility(View.GONE);
         // Load ShakeAnimation
-        this.shakeAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.shake_animation);
+        this.shakeAnimation     = AnimationUtils.loadAnimation(getActivity(), R.anim.shake_animation);
 
-        // Set Color text for signup, hidepassword, forgotpassword
-        this.signUp.setTextColor(Color.WHITE);
-        this.show_hide_password.setTextColor(Color.WHITE);
-        this.forgotPassword.setTextColor(Color.WHITE);
     }
 
     // Set Listeners
@@ -98,6 +104,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
         switch (v.getId()) {
             case R.id.loginBtn:
                 if(this.checkValidation()) {
+                    this.loadingOption.setVisibility(View.VISIBLE);
                     String email = this.emailid.getText().toString();
                     String password = this.password.getText().toString();
                     try {
@@ -105,28 +112,14 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                         login_json.put("email", email);
                         login_json.put("password", password);
 
-
-                        PostRequests login_request = new PostRequests(login_json);
-                        login_request.execute(Utils.URL + "/login");
-
-                        JSONObject response = login_request.get();
-                        int response_status_code = response.getInt("status_code");
-                        Log.d("status_code", response_status_code+"");
-                        if(response_status_code == 200) {
-                            Intent intent = new Intent(getActivity(), MainMenu.class);
-                            this.startActivity(intent);
-                        } else {
-                            new CustomToast().Show_Toast(getActivity(), v, response.getString("response"));
-                        }
+                        LoginRequest loginRequest = new LoginRequest(this, login_json);
+                        loginRequest.execute(Utils.URL + "/login");
                     } catch (Exception e) {
                         new CustomToast().Show_Toast(getActivity(), v, "Error");
                         Log.d("LoginError", e.toString());
                     }
                 }
-
-
                 break;
-
             case R.id.forgot_password:
                 // Replace forgot password fragment with animation
                 this.fragmentManager.beginTransaction().setCustomAnimations(R.anim.right_enter_animation, R.anim.left_exit_animation)
@@ -158,7 +151,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
             return false;
         }else if (!m.find()) {
             // Check if email id is valid or not
-            new CustomToast().Show_Toast(getActivity(), view,"Your Email Id is Invalid.");
+            new CustomToast().Show_Toast(getActivity(), view,"Your Email is Invalid.");
             return false;
         } else {
             // Else do login and do your stuff
@@ -166,6 +159,21 @@ public class Login_Fragment extends Fragment implements OnClickListener {
             return true;
         }
 
+
+    }
+
+    @Override
+    public void requestDone(Object object, int statusCode) {
+        this.loadingOption.setVisibility(View.GONE);
+
+        if(statusCode == HttpURLConnection.HTTP_OK) {
+            Intent intent = new Intent(getActivity(), MainMenu.class);
+            this.startActivity(intent);
+            this.sharedPreferences.edit().putBoolean("isLogged", true).apply();
+            new CustomToast().Show_Toast(getActivity(), this.view, (String) object);
+        } else {
+            this.sharedPreferences.edit().putBoolean("isLogged", false).apply();
+        }
 
     }
 }

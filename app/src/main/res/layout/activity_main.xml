@@ -8,7 +8,7 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@color/background_color" >
+        android:background="@color/white_backgorund" >
 
         <ImageView
             android:id="@+id/close_activity"
@@ -19,7 +19,7 @@
             android:layout_margin="4dp"
             android:contentDescription="@string/closebutton"
             android:padding="5dp"
-            android:src="@drawable/close" />
+            android:src="@drawable/close_blue" />
 
         <FrameLayout
             android:id="@+id/frameContainer"

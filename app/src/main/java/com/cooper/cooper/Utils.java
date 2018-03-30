@@ -15,6 +15,7 @@ public class Utils {
     public static final String ForgotPassword_Fragment = "ForgotPassword_Fragment";
     public static final String Invite_toPool_Fragment = "Invite_toPool_Fragment";
 
+    public static final String PROPERTIES_FILE = "properties.xml";
 
-    public static final String URL = "http://10.43.102.93:3000";
+    public static final String URL = "http://10.0.0.11:3000";
 }

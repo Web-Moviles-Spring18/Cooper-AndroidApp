@@ -18,10 +18,10 @@ import java.util.regex.Pattern;
 
 public class ForgotPassword_Fragment extends Fragment implements
         OnClickListener {
-    private static View view;
+    private View view;
 
-    private static EditText emailId;
-    private static TextView submit, back;
+    private EditText emailId;
+    private TextView submit, back;
 
     public ForgotPassword_Fragment() {
 
@@ -42,10 +42,6 @@ public class ForgotPassword_Fragment extends Fragment implements
         emailId = (EditText) view.findViewById(R.id.registered_emailid);
         submit = (TextView) view.findViewById(R.id.forgot_button);
         back = (TextView) view.findViewById(R.id.backToLoginBtn);
-
-        back.setTextColor(Color.WHITE);
-        submit.setTextColor(Color.WHITE);
-
     }
 
     // Set Listeners over buttons
