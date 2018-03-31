@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    tools:context="com.cooper.cooper.PoolDetails">
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="22dp"
+        android:hint="Pool Name"
+        android:textColor="@color/white"
+        android:textSize="36sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/name"
+        android:layout_alignBottom="@+id/name"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="15dp"
+        android:hint="Amount"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/payment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/name"
+        android:layout_marginTop="15dp"
+        android:layout_toEndOf="@+id/name"
+        android:hint="Payment Method"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/pending"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/payment"
+        android:layout_alignBottom="@+id/payment"
+        android:layout_alignStart="@+id/name"
+        android:hint="Pending"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/paid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/pending"
+        android:layout_below="@+id/pending"
+        android:hint="Paid"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/invite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/members"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/loginbutton_selector"
+        android:onClick="goToInvitePool"
+        android:padding="3dp"
+        android:text="Invitar"
+        android:textColor="@color/background_color"
+        android:textSize="17sp"
+        android:textStyle="bold" />
+
+    <ListView
+        android:id="@+id/members"
+        android:layout_width="match_parent"
+        android:layout_height="360dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/payment"
+        android:layout_marginTop="35dp" />
+
+
+</RelativeLayout>

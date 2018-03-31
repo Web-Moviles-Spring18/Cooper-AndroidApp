@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context="com.cooper.cooper.CreatePool"
+    android:background="@color/background_color">
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="CREATE POOL"
+        android:textColor="@color/white_greyish"
+        android:textSize="42sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/pool_name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/transparent"
+        android:drawablePadding="8dp"
+        android:gravity="center_vertical"
+        android:hint="Pool Name"
+        android:inputType="textCapWords"
+        android:padding="10dp"
+        android:singleLine="true"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="16sp" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:background="@color/white_greyish" />
+
+    <EditText
+        android:id="@+id/pool_amount"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@android:color/transparent"
+        android:drawablePadding="8dp"
+        android:gravity="center_vertical"
+        android:hint="Pool Amount"
+        android:inputType="number"
+        android:padding="10dp"
+        android:singleLine="true"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="16sp" />
+
+    <!--<View
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:background="@color/white_greyish" />
+
+    <EditText
+        android:id="@+id/mobileNumber"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@android:color/transparent"
+        android:drawableLeft="@drawable/phone"
+        android:drawablePadding="8dp"
+        android:gravity="center_vertical"
+        android:hint="@string/mobileNumber"
+        android:inputType="phone"
+        android:padding="10dp"
+        android:singleLine="true"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="16sp" />-->
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:background="@color/white_greyish" />
+
+    <!--<EditText
+        android:id="@+id/location"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@android:color/transparent"
+        android:drawableLeft="@drawable/location"
+        android:drawablePadding="8dp"
+        android:gravity="center_vertical"
+        android:hint="@string/location"
+        android:inputType="textCapWords"
+        android:padding="10dp"
+        android:singleLine="true"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="16sp" />-->
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:background="@color/white_greyish" />
+
+    <EditText
+        android:id="@+id/start_date"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@android:color/transparent"
+        android:drawablePadding="8dp"
+        android:gravity="center_vertical"
+        android:hint="Start Date"
+        android:inputType="date"
+        android:padding="10dp"
+        android:singleLine="true"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="16sp" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:background="@color/white_greyish" />
+
+    <EditText
+        android:id="@+id/end_date"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@android:color/transparent"
+        android:drawablePadding="8dp"
+        android:gravity="center_vertical"
+        android:hint="End Date"
+        android:inputType="date"
+        android:padding="10dp"
+        android:singleLine="true"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Payment Method"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="33dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/credit_card"
+            android:layout_width="45dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Credit Card" />
+
+        <RadioButton
+            android:id="@+id/cash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cash" />
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pool Privacy"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/is_private"
+            android:layout_width="52dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Private" />
+
+        <RadioButton
+            android:id="@+id/is_public"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Public" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/createPoolBtn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/loginbutton_selector"
+        android:onClick="createPool"
+        android:padding="3dp"
+        android:text="create pool"
+        android:textColor="@color/background_color"
+        android:textSize="17sp"
+        android:textStyle="bold" />
+
+</LinearLayout>

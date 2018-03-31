@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.cooper.cooper.MainMenu"
+    android:background="@color/background_color">
+
+    <ImageButton
+        android:id="@+id/createPoolButton"
+        android:layout_width="120dip"
+        android:layout_height="120dip"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/createEventButton"
+        android:layout_marginStart="55dp"
+        android:background="@drawable/roundcorner"
+        android:onClick="poolSection"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/mm_create_pool_button" />
+
+    <ImageButton
+        android:id="@+id/createEventButton"
+        android:layout_width="120dip"
+        android:background="@drawable/roundcorner"
+        android:layout_height="120dip"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="160dp"
+        android:layout_toEndOf="@+id/createPoolButton"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/mm_create_event_button" />
+
+    <ImageButton
+        android:id="@+id/seeStatsButton"
+        android:layout_width="120dip"
+        android:background="@drawable/roundcorner"
+        android:layout_height="120dip"
+        android:layout_alignStart="@+id/createPoolButton"
+        android:layout_below="@+id/createPoolButton"
+        android:layout_marginTop="37dp"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/mm_see_stats_button" />
+
+    <ImageButton
+        android:id="@+id/joinPoolButton"
+        android:background="@drawable/roundcorner"
+        android:layout_width="120dip"
+        android:layout_height="120dip"
+        android:layout_alignStart="@+id/createEventButton"
+        android:layout_alignTop="@+id/seeStatsButton"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/mm_join_pool_button" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/createPoolButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:text="Cooper"
+        android:textColor="@color/white"
+        android:textSize="42sp" />
+
+    <ImageButton
+        android:id="@+id/profile"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_above="@+id/textView"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="13dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/circle_btn"
+        app:srcCompat="@drawable/user" />
+</RelativeLayout>
