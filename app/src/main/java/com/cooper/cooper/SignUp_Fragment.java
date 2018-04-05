@@ -35,28 +35,28 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.signup_layout, container, false);
-        initViews();
-        setListeners();
+        this.view = inflater.inflate(R.layout.signup_layout, container, false);
+        this.initViews();
+        this.setListeners();
         return view;
     }
 
     // Initialize all views
     private void initViews() {
-        fullName = (EditText) view.findViewById(R.id.fullName);
-        emailId = (EditText) view.findViewById(R.id.userEmailId);
-        password = (EditText) view.findViewById(R.id.password);
-        confirmPassword = (EditText) view.findViewById(R.id.confirmPassword);
-        signUpButton = (Button) view.findViewById(R.id.signUpBtn);
-        login = (TextView) view.findViewById(R.id.already_user);
-        terms_conditions = (CheckBox) view.findViewById(R.id.terms_conditions);
+        this.fullName = (EditText) view.findViewById(R.id.fullName);
+        this.emailId = (EditText) view.findViewById(R.id.userEmailId);
+        this.password = (EditText) view.findViewById(R.id.password);
+        this.confirmPassword = (EditText) view.findViewById(R.id.confirmPassword);
+        this.signUpButton = (Button) view.findViewById(R.id.signUpBtn);
+        this.login = (TextView) view.findViewById(R.id.already_user);
+        this.terms_conditions = (CheckBox) view.findViewById(R.id.terms_conditions);
 
     }
 
     // Set Listeners
     private void setListeners() {
-        signUpButton.setOnClickListener(this);
-        login.setOnClickListener(this);
+        this.signUpButton.setOnClickListener(this);
+        this.login.setOnClickListener(this);
     }
 
     @Override
