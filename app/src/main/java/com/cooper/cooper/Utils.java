@@ -16,5 +16,5 @@ public class Utils {
     public static final String Invite_toPool_Fragment = "Invite_toPool_Fragment";
 
 
-    public static final String URL = "http://10.43.102.93:3000";
+    public static final String URL = "http://167.99.98.101:3000";
 }

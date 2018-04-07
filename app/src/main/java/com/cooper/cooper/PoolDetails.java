@@ -63,8 +63,10 @@ public class PoolDetails extends AppCompatActivity {
             double amount_each = this.tempAmount / pool_members.length();
             for (int i = 0; i < pool_members.length() ; i++) {
                 JSONObject object = pool_members.getJSONObject(i);
+                Log.d("pool_memb object", object.toString());
+                Log.d("pool_memb obj name", object.getJSONObject("node").getString("email"));
                 JSONObject member = new JSONObject();
-                member.put("name", object.getJSONObject("node").getString("name"));
+                member.put("name", object.getJSONObject("node").getString("email"));
                 member.put("amount", amount_each);
                 this.setMembers_listview(member);
             }
@@ -86,7 +88,7 @@ public class PoolDetails extends AppCompatActivity {
         String payment = node.getString("paymentMethod");
         boolean isPrivate = node.getBoolean("private");
         String currency = node.getString("currency");
-        String invitation_code = node.getString("invite");
+        String invitation_code = "";//node.getString("invite");
         String ends = node.getString("ends");
         int id = node.getInt("_id");
         double total = node.getDouble("total");
