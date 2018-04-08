@@ -7,9 +7,7 @@ import java.util.regex.Pattern;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.text.method.HideReturnsTransformationMethod;
@@ -32,7 +30,6 @@ import android.widget.TextView;
 
 import com.cooper.cooper.http_requests.HTTPRequestListener;
 import com.cooper.cooper.http_requests.LoginRequest;
-import com.cooper.cooper.http_requests.PostRequests;
 
 import org.json.JSONObject;
 

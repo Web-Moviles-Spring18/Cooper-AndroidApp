@@ -16,6 +16,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cooper.cooper.CustomToast;
+import com.cooper.cooper.MainActivity;
+import com.cooper.cooper.R;
+import com.cooper.cooper.Utils;
 import com.cooper.cooper.http_requests.PostRequests;
 
 import org.json.JSONObject;
