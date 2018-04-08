@@ -46,11 +46,11 @@ public class PoolListAdapter extends BaseAdapter{
 
         if(view == null) {
             // Crear view por primera vez
-            view = activity.getLayoutInflater().inflate(R.layout.pools_list_view, null);
+            view = activity.getLayoutInflater().inflate(R.layout.coops_list_layout, null);
         }
 
-        TextView name = (TextView) view.findViewById(R.id.pool_name);
-        TextView amount = (TextView) view.findViewById(R.id.amount);
+        TextView name = (TextView) view.findViewById(R.id.title);
+        TextView amount = (TextView) view.findViewById(R.id.totalAmount);
 
         Pool currentPool = pools.get(i);
         name.setText(currentPool.getName());

@@ -86,7 +86,7 @@ public class PoolDetails extends AppCompatActivity {
         String payment = node.getString("paymentMethod");
         boolean isPrivate = node.getBoolean("private");
         String currency = node.getString("currency");
-        String invitation_code = node.getString("invite");
+        String invitation_code = "";//node.getString("invite");
         String ends = node.getString("ends");
         int id = node.getInt("_id");
         double total = node.getDouble("total");
