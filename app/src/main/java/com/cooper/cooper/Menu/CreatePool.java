@@ -1,6 +1,5 @@
-package com.cooper.cooper;
+package com.cooper.cooper.Menu;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +7,9 @@ import android.view.View;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.cooper.cooper.CustomToast.AlertToast;
+import com.cooper.cooper.R;
+import com.cooper.cooper.Utils;
 import com.cooper.cooper.http_requests.PostRequests;
 
 import org.json.JSONObject;
@@ -49,7 +51,7 @@ public class CreatePool extends AppCompatActivity {
             try {
                amount = Double.parseDouble(this.pool_amount.getText().toString());
             } catch (Exception e) {
-                new CustomToast().Show_Toast(this, v, "Error, must be an amount");
+                new AlertToast().Show_Toast(this, v, "Error, must be an amount");
             }
             String payment = "cash";
             if(this.isCreditCard.isChecked()) {
@@ -75,10 +77,10 @@ public class CreatePool extends AppCompatActivity {
             if(response_status_code == 200) {
                 this.finish();
             } else {
-                new CustomToast().Show_Toast(this, v, response.getString("response"));
+                new AlertToast().Show_Toast(this, v, response.getString("response"));
             }
         } catch (Exception e) {
-            new CustomToast().Show_Toast(this, v, "Error");
+            new AlertToast().Show_Toast(this, v, "Error");
             Log.d("CreatePoolError", e.toString());
         }
 

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color"
-    tools:context="com.cooper.cooper.PoolDetails">
+    tools:context="com.cooper.cooper.Menu.PoolDetails">
 
     <TextView
         android:id="@+id/name"

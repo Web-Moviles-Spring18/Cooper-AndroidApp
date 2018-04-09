@@ -1,4 +1,4 @@
-package com.cooper.cooper;
+package com.cooper.cooper.Menu;
 
 
 import android.app.Activity;
@@ -6,6 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.cooper.cooper.Menu.Pool;
+import com.cooper.cooper.R;
 
 import java.util.ArrayList;
 

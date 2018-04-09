@@ -1,8 +1,5 @@
-package com.cooper.cooper;
+package com.cooper.cooper.Menu;
 
-import android.annotation.SuppressLint;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +8,8 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.cooper.cooper.R;
+import com.cooper.cooper.Utils;
 import com.cooper.cooper.http_requests.GetRequests;
 
 import org.json.JSONArray;

@@ -1,4 +1,4 @@
-package com.cooper.cooper;
+package com.cooper.cooper.CustomToast;
 
 /**
  * Created by marco on 15/02/2018.
@@ -12,7 +12,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class CustomToast {
+import com.cooper.cooper.R;
+
+public class SuccessToast {
 
     // Custom Toast Method
     public void Show_Toast(Context context, View view, String error) {
@@ -22,7 +24,7 @@ public class CustomToast {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         // inflate the layout over view
-        View layout = inflater.inflate(R.layout.custom_toast,
+        View layout = inflater.inflate(R.layout.success_toast,
                 (ViewGroup) view.findViewById(R.id.toast_root));
 
         // Get TextView id and set error

@@ -1,4 +1,4 @@
-package com.cooper.cooper;
+package com.cooper.cooper.Menu;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.cooper.cooper.R;
+import com.cooper.cooper.Utils;
 import com.cooper.cooper.http_requests.GetRequests;
 
 import org.json.JSONArray;

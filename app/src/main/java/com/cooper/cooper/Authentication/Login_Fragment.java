@@ -1,4 +1,4 @@
-package com.cooper.cooper;
+package com.cooper.cooper.Authentication;
 
 import java.net.HttpURLConnection;
 import java.util.regex.Matcher;
@@ -28,6 +28,11 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.cooper.cooper.CustomToast.AlertToast;
+import com.cooper.cooper.CustomToast.SuccessToast;
+import com.cooper.cooper.MainMenu;
+import com.cooper.cooper.R;
+import com.cooper.cooper.Utils;
 import com.cooper.cooper.http_requests.HTTPRequestListener;
 import com.cooper.cooper.http_requests.LoginRequest;
 
@@ -112,7 +117,7 @@ public class Login_Fragment extends Fragment implements OnClickListener, HTTPReq
                         LoginRequest loginRequest = new LoginRequest(this, login_json);
                         loginRequest.execute(Utils.URL + "/login");
                     } catch (Exception e) {
-                        new CustomToast().Show_Toast(getActivity(), v, "Error");
+                        new AlertToast().Show_Toast(getActivity(), v, "Error");
                         Log.d("LoginError", e.toString());
                     }
                 }
@@ -144,11 +149,11 @@ public class Login_Fragment extends Fragment implements OnClickListener, HTTPReq
         // Check for both field is empty or not
         if (getEmailId.equals("") || getEmailId.length() == 0 || getPassword.equals("") || getPassword.length() == 0) {
             this.loginLayout.startAnimation(shakeAnimation);
-            new CustomToast().Show_Toast(getActivity(), view,"Enter both credentials.");
+            new AlertToast().Show_Toast(getActivity(), view,"Enter both credentials.");
             return false;
         }else if (!m.find()) {
             // Check if email id is valid or not
-            new CustomToast().Show_Toast(getActivity(), view,"Your Email is Invalid.");
+            new AlertToast().Show_Toast(getActivity(), view,"Your Email is Invalid.");
             return false;
         } else {
             // Else do login and do your stuff
@@ -162,14 +167,18 @@ public class Login_Fragment extends Fragment implements OnClickListener, HTTPReq
     @Override
     public void requestDone(Object object, int statusCode) {
         this.loadingOption.setVisibility(View.GONE);
-
+        Log.d("Response Login", (String) object);
         if(statusCode == HttpURLConnection.HTTP_OK) {
             Intent intent = new Intent(getActivity(), MainMenu.class);
             this.startActivity(intent);
             this.sharedPreferences.edit().putBoolean("isLogged", true).apply();
-            new CustomToast().Show_Toast(getActivity(), this.view, (String) object);
+            new SuccessToast().Show_Toast(getActivity(), this.view, (String) object);
+        } else if(statusCode == HttpURLConnection.HTTP_BAD_REQUEST){
+            this.sharedPreferences.edit().putBoolean("isLogged", false).apply();
+            new AlertToast().Show_Toast(getActivity(), this.view, (String) object);
         } else {
             this.sharedPreferences.edit().putBoolean("isLogged", false).apply();
+            new AlertToast().Show_Toast(getActivity(), this.view, (String) object);
         }
 
     }

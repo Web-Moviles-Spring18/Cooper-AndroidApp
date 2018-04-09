@@ -6,9 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.ImageView;
+import android.util.Log;
+
+import com.cooper.cooper.Authentication.Login_Fragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,13 +27,14 @@ public class MainActivity extends AppCompatActivity {
         // If savedinstnacestate is null then replace login fragment
         if (savedInstanceState == null) {
             if(this.sharedPreferences.getBoolean("isLogged", true)) {
-                fragmentManager.beginTransaction().replace(R.id.frameContainer, new Login_Fragment(), Utils.Login_Fragment).commit();
-            } else {
                 Intent i = new Intent(this, MainMenu.class);
                 this.startActivity(i);
+            } else {
+                fragmentManager.beginTransaction().replace(R.id.frameContainer, new Login_Fragment(), Utils.Login_Fragment).commit();
             }
 
         }
+        Log.wtf("SharedPreferences", this.sharedPreferences.toString());
 
     }
 

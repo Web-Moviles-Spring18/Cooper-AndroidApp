@@ -1,13 +1,12 @@
 package com.cooper.cooper;
 
-import android.content.Intent;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.support.v7.widget.Toolbar;
+
+import com.cooper.cooper.Menu.Coops_List_Fragment;
+import com.cooper.cooper.Menu.ViewPagerAdapter;
 
 public class MainMenu extends AppCompatActivity {
 
@@ -29,12 +28,13 @@ public class MainMenu extends AppCompatActivity {
 
     private void setupViewPager() {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new Coops_Fragment());
-        adapter.addFragment(new Coops_Fragment(), "Test");
+        adapter.addFragment(new Coops_List_Fragment());
+        adapter.addFragment(new Account_Fragment());
         this.viewPager.setAdapter(adapter);
     }
 
     private void setIconTabs() {
         this.tabLayout.getTabAt(0).setIcon(R.drawable.cooper_icon);
+        this.tabLayout.getTabAt(1).setIcon(R.drawable.user);
     }
 }

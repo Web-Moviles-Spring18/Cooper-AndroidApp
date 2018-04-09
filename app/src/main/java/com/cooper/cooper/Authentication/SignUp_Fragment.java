@@ -1,8 +1,8 @@
-package com.cooper.cooper;
+package com.cooper.cooper.Authentication;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import android.graphics.Color;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -14,9 +14,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.cooper.cooper.CustomToast;
+import com.cooper.cooper.CustomToast.AlertToast;
 import com.cooper.cooper.MainActivity;
 import com.cooper.cooper.R;
 import com.cooper.cooper.Utils;
@@ -79,10 +78,10 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
                         if(response_status_code == 200 || response_status_code == 201) {
                             new MainActivity().replaceLoginFragment();
                         } else {
-                            new CustomToast().Show_Toast(getActivity(), v, response.getString("response"));
+                            new AlertToast().Show_Toast(getActivity(), v, response.getString("response"));
                         }
                     } catch (Exception e) {
-                        new CustomToast().Show_Toast(getActivity(), v, "Error");
+                        new AlertToast().Show_Toast(getActivity(), v, "Error");
                         Log.d("CreateUserError", e.toString());
                     }
                 }
@@ -125,22 +124,22 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
                 || getConfirmPassword.equals("")
                 || getConfirmPassword.length() == 0) {
 
-            new CustomToast().Show_Toast(getActivity(), view,
+            new AlertToast().Show_Toast(getActivity(), view,
                     "All fields are required.");
             return false;
             // Check if email id valid or not
         } else if (!m.find()) {
-            new CustomToast().Show_Toast(getActivity(), view,
+            new AlertToast().Show_Toast(getActivity(), view,
                     "Your Email Id is Invalid.");
             return false;
             // Check if both password should be equal
         } else if (!getConfirmPassword.equals(getPassword)) {
-            new CustomToast().Show_Toast(getActivity(), view,
+            new AlertToast().Show_Toast(getActivity(), view,
                     "Both password doesn't match.");
         return false;
         // Make sure user should check Terms and Conditions checkbox
         } else if (!terms_conditions.isChecked()) {
-            new CustomToast().Show_Toast(getActivity(), view,
+            new AlertToast().Show_Toast(getActivity(), view,
                     "Please select Terms and Conditions.");
             return false;
             // Else do signup or do your stuff

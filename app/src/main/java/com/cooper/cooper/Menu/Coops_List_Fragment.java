@@ -1,8 +1,9 @@
-package com.cooper.cooper;
+package com.cooper.cooper.Menu;
 
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,7 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.cooper.cooper.R;
+import com.cooper.cooper.Utils;
 import com.cooper.cooper.http_requests.GetRequests;
 
 import org.json.JSONArray;
@@ -22,12 +26,14 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Coops_Fragment extends Fragment implements AdapterView.OnItemClickListener{
+public class Coops_List_Fragment extends Fragment implements AdapterView.OnItemClickListener, View.OnClickListener{
 
     private View view;
     private ArrayList<Pool> pool_list;
     private ListView listview_pools;
-    public Coops_Fragment() {
+
+    private FloatingActionButton fab;
+    public Coops_List_Fragment() {
         // Required empty public constructor
     }
 
@@ -36,6 +42,9 @@ public class Coops_Fragment extends Fragment implements AdapterView.OnItemClickL
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         this.view = inflater.inflate(R.layout.fragment_coops_, container, false);
+
+        this.fab = view.findViewById(R.id.fab);
+        this.fab.setOnClickListener(this);
 
         this.pool_list = new ArrayList<>();
 
@@ -104,4 +113,12 @@ public class Coops_Fragment extends Fragment implements AdapterView.OnItemClickL
         this.startActivity(intent);
     }
 
+    @Override
+    public void onClick(View view) {
+        switch(view.getId()) {
+            case R.id.fab:
+                Log.d("FAB", "R.id.fab");
+                Toast.makeText(getActivity(), "Action1", Toast.LENGTH_LONG).show();
+        }
+    }
 }

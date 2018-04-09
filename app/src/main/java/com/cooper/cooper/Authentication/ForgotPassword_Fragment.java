@@ -1,8 +1,5 @@
-package com.cooper.cooper;
+package com.cooper.cooper.Authentication;
 
-import android.content.res.ColorStateList;
-import android.content.res.XmlResourceParser;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,7 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.cooper.cooper.CustomToast;
+import com.cooper.cooper.CustomToast.AlertToast;
 import com.cooper.cooper.MainActivity;
 import com.cooper.cooper.R;
 import com.cooper.cooper.Utils;
@@ -86,12 +83,12 @@ public class ForgotPassword_Fragment extends Fragment implements
         // First check if email id is not null else show error toast
         if (getEmailId.equals("") || getEmailId.length() == 0)
 
-            new CustomToast().Show_Toast(getActivity(), view,
+            new AlertToast().Show_Toast(getActivity(), view,
                     "Please enter your Email Id.");
 
             // Check if email id is valid or not
         else if (!m.find())
-            new CustomToast().Show_Toast(getActivity(), view,
+            new AlertToast().Show_Toast(getActivity(), view,
                     "Your Email Id is Invalid.");
 
             // Else submit email id and fetch passwod or do your stuff

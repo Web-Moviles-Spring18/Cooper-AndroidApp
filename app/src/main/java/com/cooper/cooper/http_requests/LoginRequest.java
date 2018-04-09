@@ -68,15 +68,17 @@ public class LoginRequest extends AsyncTask<String, Void, Object> {
                 }
                 Log.d("Response", response_body.toString());
                 in.close();
-            } else {
-                response_body.append("Error, try later!");
-            }
-            Map<String, List<String>> headerFields = urlConnection.getHeaderFields();
-            List<String> cookiesHeader = headerFields.get(COOKIES_HEADER);
-            if (cookiesHeader != null) {
-                for (String cookie : cookiesHeader) {
-                    CookieManager.setCookie(strings[0], cookie);
+                Map<String, List<String>> headerFields = urlConnection.getHeaderFields();
+                List<String> cookiesHeader = headerFields.get(COOKIES_HEADER);
+                if (cookiesHeader != null) {
+                    for (String cookie : cookiesHeader) {
+                        CookieManager.setCookie(strings[0], cookie);
+                    }
                 }
+            } else if(this.statusCode == HttpURLConnection.HTTP_BAD_REQUEST){
+                response_body.append("Invalid Email or Password!");
+            } else {
+                response_body.append("There was an Error, try later!");
             }
             return response_body.toString();
 

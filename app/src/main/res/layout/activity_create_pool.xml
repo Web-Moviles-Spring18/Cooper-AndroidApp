@@ -6,7 +6,7 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:padding="20dp"
-    tools:context="com.cooper.cooper.CreatePool"
+    tools:context="com.cooper.cooper.Menu.CreatePool"
     android:background="@color/background_color">
 
     <TextView

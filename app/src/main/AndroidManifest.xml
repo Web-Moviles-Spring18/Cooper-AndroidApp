@@ -25,7 +25,7 @@
         </activity>
         <activity android:name=".MainMenu" />
         <activity
-            android:name=".PoolLists"
+            android:name=".Menu.PoolLists"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_pool_lists"
             android:theme="@style/FullscreenTheme" />
@@ -34,9 +34,9 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".CreatePool" />
-        <activity android:name=".PoolDetails" />
-        <activity android:name=".Invite_toPool"></activity>
+        <activity android:name=".Menu.CreatePool" />
+        <activity android:name=".Menu.PoolDetails" />
+        <activity android:name=".Menu.Invite_toPool"></activity>
     </application>
 
 </manifest>
