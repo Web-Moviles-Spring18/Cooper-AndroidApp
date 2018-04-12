@@ -14,7 +14,7 @@ import com.cooper.cooper.http_requests.PostRequests;
 
 import org.json.JSONObject;
 
-public class CreatePool extends AppCompatActivity {
+public class CreateCoops_Act extends AppCompatActivity {
 
     private TextView pool_name,
                      pool_amount,

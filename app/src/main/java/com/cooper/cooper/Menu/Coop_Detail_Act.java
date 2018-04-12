@@ -5,9 +5,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.cooper.cooper.CustomToast.AlertToast;
+import com.cooper.cooper.CustomToast.SuccessToast;
 import com.cooper.cooper.R;
 import com.cooper.cooper.Utils;
 import com.cooper.cooper.http_requests.GetRequests;
@@ -17,16 +20,16 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class PoolDetails extends AppCompatActivity {
+public class Coop_Detail_Act extends AppCompatActivity {
 
-    private ListView members_listview;
+
     private TextView pool_name;
     private TextView pool_amount;
     private TextView payment_method;
     private TextView pool_pending;
     private TextView pool_paid;
+    private FrameLayout fragmentContainer;
     private String invitation_code;
-    private ArrayList<JSONObject> members;
     private long pool_id;
     private double tempAmount;
 
@@ -35,18 +38,21 @@ public class PoolDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pool_details);
 
-        this.members_listview = (ListView) findViewById(R.id.members);
         this.pool_name = (TextView) findViewById(R.id.name);
         this.pool_amount = (TextView) findViewById(R.id.amount);
         this.payment_method = (TextView) findViewById(R.id.payment);
         this.pool_paid = (TextView) findViewById(R.id.paid);
         this.pool_pending = (TextView) findViewById(R.id.pending);
+        this.fragmentContainer = (FrameLayout) findViewById(R.id.container);
 
         Intent intent = getIntent();
-        this.pool_id = intent.getLongExtra("pool", 267);
-        this.members = new ArrayList<>();
+        this.pool_id = intent.getLongExtra("pool", 0);
 
-        try {
+        if (this.pool_id == 0) {
+           this.finish();
+           new AlertToast().Show_Toast(this, null, "Coop Not Founded!");
+        }
+        /*try {
             GetRequests get_pool_data = new GetRequests();
             get_pool_data.execute(Utils.URL + "/pool/"+pool_id);
 
@@ -58,7 +64,7 @@ public class PoolDetails extends AppCompatActivity {
 
             /*
                 FIXME: this method, get from GET REQUEST, pending backend
-             */
+
             double amount_each = this.tempAmount / pool_members.length();
             for (int i = 0; i < pool_members.length() ; i++) {
                 JSONObject object = pool_members.getJSONObject(i);
@@ -72,12 +78,12 @@ public class PoolDetails extends AppCompatActivity {
             Log.d("response get pool list", pool_data.toString());
         } catch (Exception e) {
             Log.d("Get Pool List Error", e.toString());
-        }
+        }*/
 
 
-         MemberListAdapter membersAdapter = new MemberListAdapter(members, this);
+         /*MemberListAdapter membersAdapter = new MemberListAdapter(members, this);
 
-        this.members_listview.setAdapter(membersAdapter);
+        this.members_listview.setAdapter(membersAdapter);*/
     }
 
     public void setPoolData(JSONObject node) throws Exception {
@@ -99,9 +105,9 @@ public class PoolDetails extends AppCompatActivity {
         this.pool_paid.setText("Paid: $"+0.00);
     }
 
-    public void setMembers_listview(JSONObject member) throws Exception {
+    /*public void setMembers_listview(JSONObject member) throws Exception {
         this.members.add(member);
-    }
+    }*/
 
     public void goToInvitePool(View view) {
         Log.d("go to invitation", this.pool_id+"");

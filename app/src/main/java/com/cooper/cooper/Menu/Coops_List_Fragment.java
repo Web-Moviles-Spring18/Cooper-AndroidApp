@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +34,8 @@ public class Coops_List_Fragment extends Fragment implements AdapterView.OnItemC
     private ListView listview_pools;
 
     private FloatingActionButton fab;
+    private FragmentManager fragmentManager;
+
     public Coops_List_Fragment() {
         // Required empty public constructor
     }
@@ -41,7 +44,9 @@ public class Coops_List_Fragment extends Fragment implements AdapterView.OnItemC
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        this.view = inflater.inflate(R.layout.fragment_coops_, container, false);
+        this.view = inflater.inflate(R.layout.fragment_coops_list, container, false);
+
+        this.fragmentManager = getActivity().getSupportFragmentManager();
 
         this.fab = view.findViewById(R.id.fab);
         this.fab.setOnClickListener(this);
@@ -100,7 +105,7 @@ public class Coops_List_Fragment extends Fragment implements AdapterView.OnItemC
         this.pool_list.add(new_pool);
     }
     /*public void createPool(View v){
-        Intent intent = new Intent(this, CreatePool.class);
+        Intent intent = new Intent(this, CreateCoops_Act.class);
         this.startActivity(intent);
     }*/
 
@@ -108,10 +113,11 @@ public class Coops_List_Fragment extends Fragment implements AdapterView.OnItemC
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         Log.d("ID pool", l+"");
-        Intent intent = new Intent(this.view.getContext(), PoolDetails.class);
+        Intent intent = new Intent(this.view.getContext(), Coop_Detail_Act.class);
         intent.putExtra("pool", l);
         this.startActivity(intent);
     }
+
 
     @Override
     public void onClick(View view) {
@@ -119,6 +125,10 @@ public class Coops_List_Fragment extends Fragment implements AdapterView.OnItemC
             case R.id.fab:
                 Log.d("FAB", "R.id.fab");
                 Toast.makeText(getActivity(), "Action1", Toast.LENGTH_LONG).show();
+               /* MainMenu menu = (MainMenu) this.getActivity();
+                menu.replaceCoopCreateFragment(0, new Coops_Create_Fragment());*/
+                /*this.fragmentManager.beginTransaction().setCustomAnimations(R.anim.right_enter_animation, R.anim.left_exit_animation)
+                 .replace(R.id.viewpager, new Coops_Create_Fragment()).commit();*/
         }
     }
 }

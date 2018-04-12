@@ -54,7 +54,7 @@ public class Login_Fragment extends Fragment implements OnClickListener, HTTPReq
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        this.view = inflater.inflate(R.layout.login_layout, container, false);
+        this.view = inflater.inflate(R.layout.fragment_login_layout, container, false);
         this.sharedPreferences = this.getActivity().getSharedPreferences("login", Context.MODE_PRIVATE);
         this.initViews();
         this.setListeners();

@@ -80,7 +80,7 @@ public class PoolLists extends AppCompatActivity implements AdapterView.OnItemCl
         this.pool_list.add(new_pool);
     }
     public void createPool(View v){
-        Intent intent = new Intent(this, CreatePool.class);
+        Intent intent = new Intent(this, CreateCoops_Act.class);
         this.startActivity(intent);
     }
 
@@ -88,7 +88,7 @@ public class PoolLists extends AppCompatActivity implements AdapterView.OnItemCl
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         Log.d("ID pool", l+"");
-        Intent intent = new Intent(this, PoolDetails.class);
+        Intent intent = new Intent(this, Coop_Detail_Act.class);
         intent.putExtra("pool", l);
         this.startActivity(intent);
     }

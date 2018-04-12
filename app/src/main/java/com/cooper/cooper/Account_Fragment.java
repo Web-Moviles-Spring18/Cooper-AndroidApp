@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.cooper.cooper.CustomToast.AlertToast;
 import com.cooper.cooper.CustomToast.SuccessToast;
 import com.cooper.cooper.http_requests.HTTPRequestListener;
 import com.cooper.cooper.http_requests.LogoutRequest;
@@ -66,6 +67,8 @@ public class Account_Fragment extends Fragment implements View.OnClickListener, 
             Intent intent = new Intent(this.getActivity(), MainActivity.class);
             this.startActivity(intent);
             new SuccessToast().Show_Toast(this.getActivity(), this.view, (String) object);
+        } else {
+            new AlertToast().Show_Toast(this.getActivity(), this.view, (String) object);
         }
     }
 }

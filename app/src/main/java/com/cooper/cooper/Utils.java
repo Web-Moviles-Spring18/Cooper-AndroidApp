@@ -13,6 +13,8 @@ public class Utils {
     public static final String Login_Fragment = "Login_Fragment";
     public static final String SignUp_Fragment = "SignUp_Fragment";
     public static final String ForgotPassword_Fragment = "ForgotPassword_Fragment";
+    public static final String Coops_Create_Fragment = "Coops_Create_Fragment";
+    public static final String Coops_List_Fragment = "Coops_List_Fragment";
     public static final String Invite_toPool_Fragment = "Invite_toPool_Fragment";
 
     public static final String PROPERTIES_FILE = "properties.xml";
