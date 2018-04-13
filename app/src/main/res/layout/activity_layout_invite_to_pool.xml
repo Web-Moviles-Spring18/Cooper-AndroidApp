@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context="com.cooper.cooper.Menu.Invite_toPool" >
+
+
+    <EditText
+        android:id="@+id/searchUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="34dp"
+        android:drawableLeft="@drawable/user_blue"
+        android:ems="10"
+        android:hint="Search a User"
+        android:inputType="textPersonName"
+        android:textColorHighlight="@color/blue_strong"
+        android:textColorHint="@color/blue_greyish"
+        android:textColorLink="@color/blue_strong"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/searchBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/searchUser"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="22dp"
+        android:background="@color/green_btn_background"
+        android:onClick="searchUser"
+        android:text="Search"
+        android:textColor="@color/textColorPrimary" />
+
+    <ListView
+        android:id="@+id/users_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/searchUser"
+        android:layout_marginTop="38dp" />
+
+</RelativeLayout>

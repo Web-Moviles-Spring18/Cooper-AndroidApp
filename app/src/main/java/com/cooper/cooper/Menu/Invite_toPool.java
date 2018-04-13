@@ -5,51 +5,112 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.cooper.cooper.CustomToast.AlertToast;
 import com.cooper.cooper.MainMenu;
 import com.cooper.cooper.R;
 import com.cooper.cooper.Utils;
+import com.cooper.cooper.http_requests.GetRequests;
+import com.cooper.cooper.http_requests.HTTPRequestListener;
 import com.cooper.cooper.http_requests.PostRequests;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class Invite_toPool extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.List;
 
-    private TextView emailId;
+public class Invite_toPool extends AppCompatActivity implements HTTPRequestListener, AdapterView.OnItemClickListener{
+
+    private EditText userForSearch;
+    private Button searchUser;
+    private ListView users_listview;
+    private ArrayList<JSONObject> users;
+
     private long poolId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_invite_to_pool);
+        setContentView(R.layout.activity_layout_invite_to_pool);
 
-        this.emailId = (TextView) findViewById(R.id.send_email);
         Intent intent = getIntent();
         this.poolId = intent.getLongExtra("poolid", 289);
+
+        this.userForSearch = (EditText) findViewById(R.id.searchUser);
+        this.searchUser = (Button) findViewById(R.id.searchBtn);
+        this.users_listview = (ListView) findViewById(R.id.users_list);
+
+        this.users = new ArrayList<>();
+        UserListAdapter userListAdapter = new UserListAdapter(this.users, this);
+
+        this.users_listview.setAdapter(userListAdapter);
+        this.users_listview.setOnItemClickListener(this);
+
     }
 
-    public void sendInvitation(View v) {
-        try {
-            JSONObject sendInvitation = new JSONObject();
-            sendInvitation.put("email", this.emailId.getText().toString());
+    public void searchUser(View v) {
+            this.users.clear();
+            GetRequests searchUsers = new GetRequests(this);
+            String userForSearch = this.userForSearch.getText().toString();
+            Log.wtf("user", userForSearch);
+            searchUsers.execute(Utils.URL + "/user/search/"+userForSearch);
+            try {
+                JSONObject response = searchUsers.get();
+                JSONArray users_list = new JSONArray(response.getString("response"));
+                for (int i = 0; i < users_list.length() ; i++) {
+                    JSONObject object = users_list.getJSONObject(i);
+                    this.makeUser(object);
+                    Log.d("Key", object.toString());
+                }
 
-            PostRequests send_request = new PostRequests(sendInvitation);
-            send_request.execute(Utils.URL + "/pool/"+this.poolId+"/invite");
-
-            JSONObject response = send_request.get();
-            int response_status_code = response.getInt("status_code");
-            Log.d("status_" +
-                    "code", response_status_code+"");
-            if(response_status_code == 200) {
-                Intent intent = new Intent(this, MainMenu.class);
-                this.startActivity(intent);
-            } else {
-                new AlertToast().Show_Toast(this, v, response.getString("response"));
+                //JSONObject pool_list = new JSONObject(response.getString("response"));
+                Log.d("users list arr", this.users.toString());
+                Log.d("response get users list", users_list.toString());
+                this.getIntent();
+            } catch (Exception e) {
+                Log.wtf("search user error", e.toString());
             }
-        } catch (Exception e) {
-            new AlertToast().Show_Toast(this, v, "Error");
-            Log.d("LoginError", e.toString());
+
+    }
+
+    public void makeUser(JSONObject node) throws Exception {
+        String name = "";
+        String email = "";
+        int id = 0;
+
+        if(node.has("name")) {
+            name = node.getString("name");
         }
+        if(node.has("email")) {
+            email = node.getString("email");
+        }
+        if(node.has("_id")) {
+            id = node.getInt("_id");
+        }
+
+        this.users.add(node);
+    }
+
+    @Override
+    public void requestDone(Object object, int statusCode) {
+
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        try {
+            JSONObject postData = new JSONObject();
+            postData.put("1", 123);
+            PostRequests sendInvitation = new PostRequests(postData);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }

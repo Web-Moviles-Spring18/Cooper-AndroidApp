@@ -16,18 +16,18 @@ import java.util.ArrayList;
  * Created by ASUS on 22/02/2018.
  */
 
-public class MemberListAdapter extends BaseAdapter{
+public class UserListAdapter extends BaseAdapter{
 
     private Activity activity;
-    private ArrayList<JSONObject> members;
+    private ArrayList<JSONObject> users;
 
-    public MemberListAdapter(ArrayList<JSONObject> members, Activity activity) {
+    public UserListAdapter(ArrayList<JSONObject> users, Activity activity) {
         this.activity = activity;
-        this.members = members;
+        this.users = users;
     }
     @Override
     public int getCount() {
-        return this.members.size();
+        return this.users.size();
     }
 
     @Override
@@ -44,23 +44,20 @@ public class MemberListAdapter extends BaseAdapter{
     public View getView(int i, View view, ViewGroup viewGroup) {
         if(view == null) {
             // Crear view por primera vez
-            view = this.activity.getLayoutInflater().inflate(R.layout.members_list_layout, null);
+            view = this.activity.getLayoutInflater().inflate(R.layout.users_list_layout, null);
         }
 
         TextView name = (TextView) view.findViewById(R.id.user_name);
-        TextView amount = (TextView) view.findViewById(R.id.pending);
         try {
-            if(this.members.get(i).has("name")) {
-                name.setText(this.members.get(i).getString("name")+"");
+            if(this.users.get(i).has("name")) {
+                name.setText(this.users.get(i).getString("name"));
+            } else {
+                name.setText(this.users.get(i).getString("email"));
             }
 
-            amount.setText("Pending $"+this.members.get(i).getString("amount"));
         } catch (Exception e) {
             name.setText("Not Founded");
-            amount.setText("Pending $0.00");
         }
-
-
         return view;
     }
 }
