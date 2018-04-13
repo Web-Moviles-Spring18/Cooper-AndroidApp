@@ -95,6 +95,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/floatingActionButton"
         android:layout_alignStart="@+id/paid"
+        android:onClick="openChat"
         android:text="Chat" />
 
 
