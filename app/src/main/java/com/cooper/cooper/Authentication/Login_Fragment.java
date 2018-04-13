@@ -65,7 +65,7 @@ public class Login_Fragment extends Fragment implements OnClickListener, HTTPReq
     private void initViews() {
         this.fragmentManager    = getActivity().getSupportFragmentManager();
         this.loadingOption      = (ProgressBar) view.findViewById(R.id.loadingPanel);
-        this.emailid            = (EditText) view.findViewById(R.id.login_emailid);
+        this.emailid            = (EditText) view.findViewById(R.id.account_name);
         this.password           = (EditText) view.findViewById(R.id.login_password);
         this.loginButton        = (Button) view.findViewById(R.id.loginBtn);
         this.forgotPassword     = (TextView) view.findViewById(R.id.forgot_password);

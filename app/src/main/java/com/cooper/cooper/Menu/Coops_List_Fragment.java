@@ -4,6 +4,7 @@ package com.cooper.cooper.Menu;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import com.cooper.cooper.R;
 import com.cooper.cooper.Utils;
 import com.cooper.cooper.http_requests.GetRequests;
+import com.cooper.cooper.http_requests.HTTPRequestListener;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -27,13 +29,14 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Coops_List_Fragment extends Fragment implements AdapterView.OnItemClickListener, View.OnClickListener{
+public class Coops_List_Fragment extends Fragment implements AdapterView.OnItemClickListener, View.OnClickListener, HTTPRequestListener{
 
     private View view;
     private ArrayList<Pool> pool_list;
     private ListView listview_pools;
 
     private FloatingActionButton fab;
+    //private FloatingActionButton fab1;
     private FragmentManager fragmentManager;
 
     public Coops_List_Fragment() {
@@ -51,12 +54,15 @@ public class Coops_List_Fragment extends Fragment implements AdapterView.OnItemC
         this.fab = view.findViewById(R.id.fab);
         this.fab.setOnClickListener(this);
 
+        //this.fab1 = view.findViewById(R.id.fab_1);
+        //this.fab.setOnClickListener(this);
+
         this.pool_list = new ArrayList<>();
+        GetRequests get_pool_list = new GetRequests(this);
+        get_pool_list.execute(Utils.URL + "/profile/pools");
+
 
         try {
-            GetRequests get_pool_list = new GetRequests();
-            get_pool_list.execute(Utils.URL + "/profile/pools");
-
             JSONObject response = get_pool_list.get();
             JSONArray pool_list = new JSONArray(response.getString("response"));
             for (int i = 0; i < pool_list.length() ; i++) {
@@ -64,6 +70,7 @@ public class Coops_List_Fragment extends Fragment implements AdapterView.OnItemC
                 this.makePool(object.getJSONObject("node"));
                 Log.d("Key", object.toString());
             }
+
             //JSONObject pool_list = new JSONObject(response.getString("response"));
 
             Log.d("response get pool list", pool_list.toString());
@@ -84,7 +91,7 @@ public class Coops_List_Fragment extends Fragment implements AdapterView.OnItemC
 
     public void makePool(JSONObject node) throws Exception {
         String pool_name = node.getString("name");
-        String pool_label = node.getString("label");
+        String pool_label = "";//node.getString("label");
         String payment = node.getString("paymentMethod");
         boolean isPrivate = node.getBoolean("private");
         String currency = node.getString("currency");
@@ -123,12 +130,37 @@ public class Coops_List_Fragment extends Fragment implements AdapterView.OnItemC
     public void onClick(View view) {
         switch(view.getId()) {
             case R.id.fab:
-                Log.d("FAB", "R.id.fab");
-                Toast.makeText(getActivity(), "Action1", Toast.LENGTH_LONG).show();
+                Intent createCoop = new Intent(this.getActivity(), CreateCoops_Act.class);
+                this.startActivity(createCoop);
+                /*Log.d("FAB", "R.id.fab");
+                Toast.makeText(getActivity(), "Action1", Toast.LENGTH_LONG).show();*/
                /* MainMenu menu = (MainMenu) this.getActivity();
                 menu.replaceCoopCreateFragment(0, new Coops_Create_Fragment());*/
                 /*this.fragmentManager.beginTransaction().setCustomAnimations(R.anim.right_enter_animation, R.anim.left_exit_animation)
                  .replace(R.id.viewpager, new Coops_Create_Fragment()).commit();*/
         }
+    }
+
+    @Override
+    public void requestDone(Object objectRes, int statusCode) {
+        /*if(objectRes instanceof JSONObject) {
+            JSONObject response = (JSONObject) objectRes;
+            try {
+                //JSONObject response = get_pool_list.get();
+                JSONArray pool_list = new JSONArray(response.getString("response"));
+                for (int i = 0; i < pool_list.length() ; i++) {
+                    JSONObject object = pool_list.getJSONObject(i);
+                    this.makePool(object.getJSONObject("node"));
+                    Log.d("Key", object.toString());
+                }
+
+                //JSONObject pool_list = new JSONObject(response.getString("response"));
+
+                Log.d("response get pool list", pool_list.toString());
+            } catch (Exception e) {
+                Log.wtf("Get Pool List Error", e.toString());
+            }
+        }*/
+
     }
 }

@@ -6,6 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.cooper.cooper.Menu.Account_Fragment;
 import com.cooper.cooper.Menu.Coops_List_Fragment;
 import com.cooper.cooper.Menu.ViewPagerAdapter;
 
@@ -41,7 +42,7 @@ public class MainMenu extends AppCompatActivity {
 
     private void setIconTabs() {
         this.tabLayout.getTabAt(0).setIcon(R.drawable.cooper_icon_wb);
-        this.tabLayout.getTabAt(1).setIcon(R.drawable.user);
+        this.tabLayout.getTabAt(1).setIcon(R.drawable.account);
     }
 
 }

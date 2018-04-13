@@ -25,10 +25,13 @@ public class GetRequests extends AsyncTask<String, String, JSONObject> {
     private JSONObject getData;
     static final String COOKIES_HEADER = "Set-Cookie";
     static android.webkit.CookieManager CookieManager = android.webkit.CookieManager.getInstance();
+    private HTTPRequestListener listener;
+    private int statusCode;
     public GetRequests(JSONObject getData) {
         this.getData = getData;
     }
-    public GetRequests() {
+    public GetRequests(HTTPRequestListener listener) {
+        this.listener = listener;
     }
 
     @Override
@@ -45,7 +48,7 @@ public class GetRequests extends AsyncTask<String, String, JSONObject> {
             }
             urlConnection.setRequestMethod("GET");
             urlConnection.connect();
-            int statusCode = urlConnection.getResponseCode();
+            this.statusCode = urlConnection.getResponseCode();
 
             // Read the input stream into a String
             InputStream inputStream = urlConnection.getInputStream();
@@ -75,5 +78,11 @@ public class GetRequests extends AsyncTask<String, String, JSONObject> {
             // to parse it.
             return null;
         }
+    }
+
+    @Override
+    protected void onPostExecute(JSONObject jsonObject) {
+        super.onPostExecute(jsonObject);
+        this.listener.requestDone(jsonObject, this.statusCode);
     }
 }
