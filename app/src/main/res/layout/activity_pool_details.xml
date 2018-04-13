@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/"
+    android:background="@color/white"
     tools:context="com.cooper.cooper.Menu.Coop_Detail_Act">
 
     <TextView
@@ -71,7 +71,7 @@
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="370dp"
+        android:layout_height="350dp"
         android:layout_above="@+id/floatingActionButton"
         android:layout_alignParentStart="true">
 
@@ -86,6 +86,7 @@
         android:layout_marginBottom="15dp"
         android:clickable="true"
         app:backgroundTint="@color/green_btn_background"
+        app:fabSize="normal"
         app:srcCompat="@drawable/cooper_icon" />
 
 
