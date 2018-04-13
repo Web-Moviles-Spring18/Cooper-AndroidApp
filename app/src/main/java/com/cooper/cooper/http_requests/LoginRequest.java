@@ -19,7 +19,7 @@ import java.util.Properties;
  * Created by marco on 29/03/2018.
  */
 
-public class LoginRequest extends AsyncTask<String, Void, Object> {
+public class LoginRequest extends AsyncTask<String, Void, String> {
 
     private HTTPRequestListener httpListener;
     private JSONObject loginData;
@@ -34,7 +34,7 @@ public class LoginRequest extends AsyncTask<String, Void, Object> {
     }
 
     @Override
-    protected Object doInBackground(String... strings) {
+    protected String doInBackground(String... strings) {
         try {
             // This is getting the url from the string we passed in
             URL url = new URL(strings[0]);
@@ -78,19 +78,20 @@ public class LoginRequest extends AsyncTask<String, Void, Object> {
             } else if(this.statusCode == HttpURLConnection.HTTP_BAD_REQUEST){
                 response_body.append("Invalid Email or Password!");
             } else {
-                response_body.append("There was an Error, try later!");
+                response_body.append("There was a+n Error, try later!");
             }
             return response_body.toString();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return "Error";
     }
 
     @Override
-    protected void onPostExecute(Object obj) {
+    protected void onPostExecute(String obj) {
         super.onPostExecute(obj);
+        Log.wtf("LoginResponse", obj);
         this.httpListener.requestDone(obj, this.statusCode);
     }
 }

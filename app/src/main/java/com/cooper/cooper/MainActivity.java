@@ -23,10 +23,11 @@ public class MainActivity extends AppCompatActivity {
         this.sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
 
         fragmentManager = getSupportFragmentManager();
-
+        Log.wtf("SharedPreferences", this.sharedPreferences.getAll().toString());
         // If savedinstnacestate is null then replace login fragment
         if (savedInstanceState == null) {
-            if(this.sharedPreferences.getBoolean("isLogged", true)) {
+            Log.wtf("isLogged", this.sharedPreferences.getBoolean("isLogged", false)+"");
+            if(this.sharedPreferences.getBoolean("isLogged", false)) {
                 Intent i = new Intent(this, MainMenu.class);
                 this.startActivity(i);
             } else {
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
         }
-        Log.wtf("SharedPreferences", this.sharedPreferences.toString());
+
 
     }
 

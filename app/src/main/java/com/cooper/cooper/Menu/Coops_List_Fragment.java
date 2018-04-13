@@ -68,7 +68,7 @@ public class Coops_List_Fragment extends Fragment implements AdapterView.OnItemC
 
             Log.d("response get pool list", pool_list.toString());
         } catch (Exception e) {
-            Log.d("Get Pool List Error", e.toString());
+            Log.wtf("Get Pool List Error", e.toString());
         }
 
 
