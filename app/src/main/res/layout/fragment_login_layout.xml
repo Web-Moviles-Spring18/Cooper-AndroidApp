@@ -22,7 +22,7 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/login_emailid"
+            android:id="@+id/account_name"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"

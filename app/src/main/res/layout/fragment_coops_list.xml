@@ -25,7 +25,7 @@
     <ListView
         android:id="@+id/coops_list"
         android:layout_width="match_parent"
-        android:layout_height="420dp"
+        android:layout_height="410dp"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textView"
         android:layout_marginTop="13dp" />
@@ -34,13 +34,54 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/coops_list"
-        android:layout_marginEnd="13dp"
-        android:layout_marginTop="11dp"
+        android:layout_marginBottom="13dp"
+        android:layout_marginEnd="23dp"
         android:clickable="true"
-        android:src="@drawable/add"
+        android:src="@drawable/plus"
         app:backgroundTint="@color/green_btn_background"
-        app:fabSize="normal" />
+        app:fabSize="normal" >
+
+    <!--<android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="13dp"
+        android:layout_marginEnd="23dp"
+        android:clickable="true"
+        android:src="@drawable/plus"
+        app:backgroundTint="@color/green_btn_background"
+        app:fabSize="normal" />-->
+
+    </android.support.design.widget.FloatingActionButton>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView"
+        android:layout_alignTop="@+id/fab"
+        android:clickable="true"
+        android:src="@drawable/plus"
+        app:backgroundTint="@color/cooper_layout_icon_layer_backg"
+        app:fabSize="normal">
+
+        <!--<android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="13dp"
+        android:layout_marginEnd="23dp"
+        android:clickable="true"
+        android:src="@drawable/plus"
+        app:backgroundTint="@color/green_btn_background"
+        app:fabSize="normal" />-->
+
+    </android.support.design.widget.FloatingActionButton>
 
 </RelativeLayout>

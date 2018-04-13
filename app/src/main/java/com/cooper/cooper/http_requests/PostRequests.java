@@ -32,6 +32,7 @@ public class PostRequests extends AsyncTask<String, String, JSONObject> {
     private View view;
     static final String COOKIES_HEADER = "Set-Cookie";
     static android.webkit.CookieManager CookieManager = android.webkit.CookieManager.getInstance();
+    private HTTPRequestListener listener;
 
     public PostRequests(JSONObject postData, Context context) {
         if (postData != null) {

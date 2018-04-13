@@ -11,13 +11,18 @@ import android.widget.ListView;
 import com.cooper.cooper.R;
 import com.cooper.cooper.Utils;
 import com.cooper.cooper.http_requests.GetRequests;
+import com.cooper.cooper.http_requests.HTTPRequestListener;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class PoolLists extends AppCompatActivity implements AdapterView.OnItemClickListener{
+public class PoolLists extends AppCompatActivity implements AdapterView.OnItemClickListener, HTTPRequestListener{
+    @Override
+    public void requestDone(Object object, int statusCode) {
+
+    }
 
     private ArrayList<Pool> pool_list;
     private ListView listview_pools;
@@ -31,7 +36,7 @@ public class PoolLists extends AppCompatActivity implements AdapterView.OnItemCl
         this.pool_list = new ArrayList<>();
 
         try {
-                GetRequests get_pool_list = new GetRequests();
+                GetRequests get_pool_list = new GetRequests(this);
                 get_pool_list.execute(Utils.URL + "/profile/pools");
 
                 JSONObject response = get_pool_list.get();
