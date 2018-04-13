@@ -62,7 +62,7 @@
         android:id="@+id/view" />
 
     <EditText
-        android:id="@+id/email"
+        android:id="@+id/account_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/view"
@@ -86,8 +86,8 @@
         android:id="@+id/view2"
         android:layout_width="350dp"
         android:layout_height="1px"
-        android:layout_alignBottom="@+id/email"
-        android:layout_alignStart="@+id/email"
+        android:layout_alignBottom="@+id/account_email"
+        android:layout_alignStart="@+id/account_email"
         android:background="@color/blue_strong"
         android:padding="10dp"
         android:paddingRight="10dp" />
@@ -96,8 +96,8 @@
         android:id="@+id/updateProfileBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/email"
-        android:layout_below="@+id/email"
+        android:layout_alignStart="@+id/account_email"
+        android:layout_below="@+id/account_email"
         android:layout_marginStart="27dp"
         android:layout_marginTop="11dp"
         android:background="@android:color/holo_orange_dark"
@@ -128,7 +128,7 @@
         android:id="@+id/passwordtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/email"
+        android:layout_alignStart="@+id/account_email"
         android:layout_below="@+id/updateProfileBtn"
         android:layout_marginTop="37dp"
         android:fontFamily="@font/roboto_mono_medium"
@@ -139,36 +139,7 @@
 
 
     <EditText
-        android:id="@+id/new_password"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/new_password2"
-        android:layout_below="@+id/new_password2"
-        android:layout_marginTop="22dp"
-        android:background="@android:color/transparent"
-        android:drawableLeft="@drawable/password_blue"
-        android:drawablePadding="8dp"
-        android:gravity="center_vertical"
-        android:hint="@string/confirmPassword"
-        android:inputType="textPassword"
-        android:padding="10dp"
-        android:singleLine="true"
-        android:textColor="@color/blue_greyish"
-        android:textColorHint="@color/blue_greyish"
-        android:textSize="16sp" />
-
-    <View
-        android:id="@+id/view3"
-        android:layout_width="350dp"
-        android:layout_height="1px"
-        android:layout_alignBottom="@+id/new_password2"
-        android:layout_alignStart="@+id/view4"
-        android:background="@color/blue_strong"
-        android:padding="10dp"
-        android:paddingRight="10dp" />
-
-    <EditText
-        android:id="@+id/new_password2"
+        android:id="@+id/newPassword"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/passwordtitle"
@@ -186,12 +157,41 @@
         android:textColorHint="@color/blue_greyish"
         android:textSize="16sp" />
 
+    <EditText
+        android:id="@+id/confirmPassword"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/view4"
+        android:layout_below="@+id/view4"
+        android:layout_marginTop="12dp"
+        android:background="@android:color/transparent"
+        android:drawableLeft="@drawable/password_blue"
+        android:drawablePadding="8dp"
+        android:gravity="center_vertical"
+        android:hint="Confirm Password"
+        android:inputType="textPassword"
+        android:padding="10dp"
+        android:singleLine="true"
+        android:textColor="@color/blue_greyish"
+        android:textColorHint="@color/blue_greyish"
+        android:textSize="16sp" />
+
+    <View
+        android:id="@+id/view5"
+        android:layout_width="350dp"
+        android:layout_height="1px"
+        android:layout_alignBottom="@+id/confirmPassword"
+        android:layout_alignStart="@+id/confirmPassword"
+        android:background="@color/blue_strong"
+        android:padding="10dp"
+        android:paddingRight="10dp" />
+
     <View
         android:id="@+id/view4"
         android:layout_width="350dp"
         android:layout_height="1px"
-        android:layout_alignStart="@+id/new_password"
-        android:layout_below="@+id/new_password"
+        android:layout_alignStart="@+id/newPassword"
+        android:layout_below="@+id/newPassword"
         android:background="@color/blue_strong"
         android:padding="10dp"
         android:paddingRight="10dp" />
@@ -200,9 +200,9 @@
         android:id="@+id/updatePasswordBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/view4"
+        android:layout_below="@+id/confirmPassword"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="23dp"
+        android:layout_marginTop="24dp"
         android:background="@android:color/holo_orange_dark"
         android:padding="3dp"
         android:text="Change Password"

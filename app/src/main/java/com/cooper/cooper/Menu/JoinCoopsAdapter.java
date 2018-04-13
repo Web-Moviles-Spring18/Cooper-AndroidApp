@@ -16,18 +16,18 @@ import java.util.ArrayList;
  * Created by ASUS on 22/02/2018.
  */
 
-public class MemberListAdapter extends BaseAdapter{
+public class JoinCoopsAdapter extends BaseAdapter{
 
     private Activity activity;
-    private ArrayList<JSONObject> members;
+    private ArrayList<JSONObject> coops;
 
-    public MemberListAdapter(ArrayList<JSONObject> members, Activity activity) {
+    public JoinCoopsAdapter(ArrayList<JSONObject> coops, Activity activity) {
         this.activity = activity;
-        this.members = members;
+        this.coops = coops;
     }
     @Override
     public int getCount() {
-        return this.members.size();
+        return this.coops.size();
     }
 
     @Override
@@ -44,24 +44,24 @@ public class MemberListAdapter extends BaseAdapter{
     public View getView(int i, View view, ViewGroup viewGroup) {
         if(view == null) {
             // Crear view por primera vez
-            view = this.activity.getLayoutInflater().inflate(R.layout.members_list_layout, null);
+            view = this.activity.getLayoutInflater().inflate(R.layout.coops_to_join_list_layout, null);
         }
 
-        TextView name = (TextView) view.findViewById(R.id.user_name);
-        TextView amount = (TextView) view.findViewById(R.id.pending);
-        try {
-            if(this.members.get(i).has("name")) {
-                name.setText(this.members.get(i).getString("name")+"");
-                name.setTextSize(18);
-            }
+        TextView name = (TextView) view.findViewById(R.id.coopName);
+        TextView amount = (TextView) view.findViewById(R.id.coopAmount);
 
-            amount.setText("Pending $"+this.members.get(i).getString("amount"));
+        try {
+            if(this.coops.get(i).has("name")) {
+                name.setText(this.coops.get(i).getString("name"));
+            } else {
+                name.setText("Not Founded");
+            }
+            amount.setText(this.coops.get(i).getDouble("total")+"");
+
+
         } catch (Exception e) {
             name.setText("Not Founded");
-            amount.setText("Pending $0.00");
         }
-
-
         return view;
     }
 }

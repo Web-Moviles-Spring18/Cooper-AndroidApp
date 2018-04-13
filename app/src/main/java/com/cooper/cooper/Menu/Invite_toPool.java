@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.cooper.cooper.CustomToast.AlertToast;
+import com.cooper.cooper.CustomToast.SuccessToast;
 import com.cooper.cooper.MainMenu;
 import com.cooper.cooper.R;
 import com.cooper.cooper.Utils;
@@ -23,6 +24,7 @@ import com.cooper.cooper.http_requests.PostRequests;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +42,7 @@ public class Invite_toPool extends AppCompatActivity implements HTTPRequestListe
         setContentView(R.layout.activity_layout_invite_to_pool);
 
         Intent intent = getIntent();
-        this.poolId = intent.getLongExtra("poolid", 289);
+        this.poolId = intent.getLongExtra("poolid", 23);
 
         this.userForSearch = (EditText) findViewById(R.id.searchUser);
         this.searchUser = (Button) findViewById(R.id.searchBtn);
@@ -106,9 +108,23 @@ public class Invite_toPool extends AppCompatActivity implements HTTPRequestListe
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         try {
             JSONObject postData = new JSONObject();
-            postData.put("1", 123);
+            postData.put("email", this.users.get(i).getString("email"));
             PostRequests sendInvitation = new PostRequests(postData);
+            sendInvitation.execute(Utils.URL + "/pool/"+poolId+"/invite");
+
+            JSONObject response = sendInvitation.get();
+            int responseCode = response.getInt("status_code");
+            String responseStr = response.getString("response");
+            Log.d("responseCodeInvite", responseCode+"");
+            Log.d("responseCodeStr", responseStr);
+            if(responseCode == HttpURLConnection.HTTP_OK) {
+                new SuccessToast().Show_Toast(this, view, responseStr);
+            } else {
+                new AlertToast().Show_Toast(this, view, responseStr);
+            }
+
         } catch(Exception e) {
+            new AlertToast().Show_Toast(this, view, "Error");
             e.printStackTrace();
         }
 

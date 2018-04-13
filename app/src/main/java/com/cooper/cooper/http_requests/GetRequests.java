@@ -27,6 +27,8 @@ public class GetRequests extends AsyncTask<String, String, JSONObject> {
     static android.webkit.CookieManager CookieManager = android.webkit.CookieManager.getInstance();
     private HTTPRequestListener listener;
     private int statusCode;
+    public GetRequests() {
+    }
     public GetRequests(JSONObject getData) {
         this.getData = getData;
     }
@@ -63,7 +65,7 @@ public class GetRequests extends AsyncTask<String, String, JSONObject> {
                 buffer.append(line);
             }
             if (buffer.length() == 0) {
-                return null;
+                return new JSONObject();
             }
 
             JSONObject response = new JSONObject();
@@ -76,13 +78,15 @@ public class GetRequests extends AsyncTask<String, String, JSONObject> {
             Log.d("Error", e.toString());
             // If the code didn't successfully get the weather data, there's no point in attemping
             // to parse it.
-            return null;
+            return new JSONObject();
         }
     }
 
     @Override
     protected void onPostExecute(JSONObject jsonObject) {
         super.onPostExecute(jsonObject);
-        this.listener.requestDone(jsonObject, this.statusCode);
+        if(this.listener != null) {
+            this.listener.requestDone(jsonObject, this.statusCode);
+        }
     }
 }

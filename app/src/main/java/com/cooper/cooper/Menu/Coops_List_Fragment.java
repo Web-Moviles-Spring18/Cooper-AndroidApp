@@ -36,7 +36,7 @@ public class Coops_List_Fragment extends Fragment implements AdapterView.OnItemC
     private ListView listview_pools;
 
     private FloatingActionButton fab;
-    //private FloatingActionButton fab1;
+    private FloatingActionButton fab1;
     private FragmentManager fragmentManager;
 
     public Coops_List_Fragment() {
@@ -54,8 +54,8 @@ public class Coops_List_Fragment extends Fragment implements AdapterView.OnItemC
         this.fab = view.findViewById(R.id.fab);
         this.fab.setOnClickListener(this);
 
-        //this.fab1 = view.findViewById(R.id.fab_1);
-        //this.fab.setOnClickListener(this);
+        this.fab1 = view.findViewById(R.id.fab2);
+        this.fab1.setOnClickListener(this);
 
         this.pool_list = new ArrayList<>();
         GetRequests get_pool_list = new GetRequests(this);
@@ -138,6 +138,9 @@ public class Coops_List_Fragment extends Fragment implements AdapterView.OnItemC
                 menu.replaceCoopCreateFragment(0, new Coops_Create_Fragment());*/
                 /*this.fragmentManager.beginTransaction().setCustomAnimations(R.anim.right_enter_animation, R.anim.left_exit_animation)
                  .replace(R.id.viewpager, new Coops_Create_Fragment()).commit();*/
+            case R.id.fab2:
+                Intent joinCoop = new Intent(this.getActivity(), Join_Coop_Act.class);
+                this.startActivity(joinCoop);
         }
     }
 

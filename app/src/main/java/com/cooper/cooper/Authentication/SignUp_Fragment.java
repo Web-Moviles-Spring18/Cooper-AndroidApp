@@ -49,7 +49,7 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
         this.fullName = (EditText) view.findViewById(R.id.fullName);
         this.emailId = (EditText) view.findViewById(R.id.userEmailId);
         this.password = (EditText) view.findViewById(R.id.password);
-        this.confirmPassword = (EditText) view.findViewById(R.id.confirmPassword);
+        this.confirmPassword = (EditText) view.findViewById(R.id.newPassword);
         this.signUpButton = (Button) view.findViewById(R.id.signUpBtn);
         this.login = (TextView) view.findViewById(R.id.already_user);
         this.terms_conditions = (CheckBox) view.findViewById(R.id.terms_conditions);

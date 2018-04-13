@@ -79,7 +79,7 @@
         android:clickable="true"
         app:backgroundTint="@color/green_btn_background"
         app:fabSize="normal"
-        app:srcCompat="@drawable/cooper_icon" />
+        app:srcCompat="@drawable/plus" />
 
     <Button
         android:id="@+id/chat"

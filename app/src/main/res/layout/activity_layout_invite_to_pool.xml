@@ -20,6 +20,7 @@
         android:ems="10"
         android:hint="Search a User"
         android:inputType="textPersonName"
+        android:textColor="@color/blue_strong"
         android:textColorHighlight="@color/blue_strong"
         android:textColorHint="@color/blue_greyish"
         android:textColorLink="@color/blue_strong"

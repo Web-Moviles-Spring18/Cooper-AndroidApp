@@ -65,7 +65,7 @@
         android:layout_alignStart="@+id/textView"
         android:layout_alignTop="@+id/fab"
         android:clickable="true"
-        android:src="@drawable/plus"
+        android:src="@drawable/link"
         app:backgroundTint="@color/cooper_layout_icon_layer_backg"
         app:fabSize="normal">
 
