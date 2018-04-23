@@ -1,5 +1,6 @@
 package com.cooper.cooper.Menu;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +9,8 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.cooper.cooper.CustomToast.AlertToast;
+import com.cooper.cooper.MainActivity;
+import com.cooper.cooper.MainMenu;
 import com.cooper.cooper.R;
 import com.cooper.cooper.Utils;
 import com.cooper.cooper.http_requests.PostRequests;
@@ -75,7 +78,8 @@ public class CreateCoops_Act extends AppCompatActivity {
             int response_status_code = response.getInt("status_code");
             Log.d("status_code", response_status_code+"");
             if(response_status_code == 200) {
-                this.finish();
+                Intent i = new Intent(this, MainMenu.class);
+                this.startActivity(i);
             } else {
                 new AlertToast().Show_Toast(this, v, response.getString("response"));
             }

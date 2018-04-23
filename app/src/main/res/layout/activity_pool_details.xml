@@ -87,6 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/invite"
         android:layout_alignStart="@+id/paid"
+        android:onClick="openChat"
         android:text="Chat" />
 
     <ListView

@@ -71,6 +71,7 @@ public class PostRequests extends AsyncTask<String, String, JSONObject> {
              String cookie_str = CookieManager.getCookie(strings[0]);
             if (CookieManager.hasCookies() && cookie_str != null) {
                 // While joining the Cookies, use ',' or ';' as needed. Most of the servers are using ';'
+                Log.d("cookies", cookie_str);
                 urlConnection.setRequestProperty("Cookie", cookie_str);
             }
 
@@ -104,7 +105,15 @@ public class PostRequests extends AsyncTask<String, String, JSONObject> {
                 Log.d("Response", response_body.toString());
                 in.close();
             } else {
-                response_body.append("Error, try later!");
+                BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getErrorStream()));
+                String inputLine;
+
+                while ((inputLine = in.readLine()) != null) {
+                    response_body.append(inputLine);
+                }
+                Log.d("Response", response_body.toString());
+                in.close();
+                response_body.append(" Error, try later!");
                 // Status code is not 200
                 // Do something to handle the error
             }
@@ -113,7 +122,9 @@ public class PostRequests extends AsyncTask<String, String, JSONObject> {
                 Map<String, List<String>> headerFields = urlConnection.getHeaderFields();
                 List<String> cookiesHeader = headerFields.get(COOKIES_HEADER);
                 if (cookiesHeader != null) {
+                    Log.d("hasCookie", "yes :v");
                     for (String cookie : cookiesHeader) {
+                        Log.d("cookie header", "cookie");
                         CookieManager.setCookie(strings[0], cookie);
                         //CookieManager.getCookieStore().add(null, HttpCookie.parse(cookie).get(0));
                     }

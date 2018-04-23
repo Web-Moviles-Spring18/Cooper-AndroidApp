@@ -138,4 +138,9 @@ public class Coop_Detail_Act extends AppCompatActivity implements HTTPRequestLis
     public void requestDone(Object object, int statusCode) {
 
     }
+    public void openChat(View view) {
+        Intent intent = new Intent(this, Chat_Act.class);
+        intent.putExtra("pool", this.pool_id);
+        this.startActivity(intent);
+    }
 }

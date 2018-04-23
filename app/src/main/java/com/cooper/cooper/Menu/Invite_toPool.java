@@ -109,6 +109,7 @@ public class Invite_toPool extends AppCompatActivity implements HTTPRequestListe
         try {
             JSONObject postData = new JSONObject();
             postData.put("email", this.users.get(i).getString("email"));
+            Log.d("emailinvite", postData.toString());
             PostRequests sendInvitation = new PostRequests(postData);
             sendInvitation.execute(Utils.URL + "/pool/"+poolId+"/invite");
 

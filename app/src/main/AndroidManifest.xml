@@ -39,6 +39,8 @@
         <activity android:name=".Menu.Invite_toPool" />
         <activity android:name=".Menu.ProfilePicture_Account_Activity" />
         <activity android:name=".Menu.Join_Coop_Act"></activity>
+        <activity android:name=".Menu.Chat_Act" />
+        <activity android:name=".Menu.ProfilePicture_Account_Activity"></activity>
     </application>
 
 </manifest>

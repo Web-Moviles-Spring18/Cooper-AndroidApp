@@ -132,15 +132,11 @@ public class Coops_List_Fragment extends Fragment implements AdapterView.OnItemC
             case R.id.fab:
                 Intent createCoop = new Intent(this.getActivity(), CreateCoops_Act.class);
                 this.startActivity(createCoop);
-                /*Log.d("FAB", "R.id.fab");
-                Toast.makeText(getActivity(), "Action1", Toast.LENGTH_LONG).show();*/
-               /* MainMenu menu = (MainMenu) this.getActivity();
-                menu.replaceCoopCreateFragment(0, new Coops_Create_Fragment());*/
-                /*this.fragmentManager.beginTransaction().setCustomAnimations(R.anim.right_enter_animation, R.anim.left_exit_animation)
-                 .replace(R.id.viewpager, new Coops_Create_Fragment()).commit();*/
+                break;
             case R.id.fab2:
                 Intent joinCoop = new Intent(this.getActivity(), Join_Coop_Act.class);
                 this.startActivity(joinCoop);
+                break;
         }
     }
 
