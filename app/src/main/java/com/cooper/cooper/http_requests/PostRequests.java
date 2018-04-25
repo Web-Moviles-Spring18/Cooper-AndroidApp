@@ -4,48 +4,20 @@ package com.cooper.cooper.http_requests;
  * Created by marco on 20/02/2018.
  */
 
-import android.content.Intent;
 import android.os.AsyncTask;
-import android.text.TextUtils;
 import android.util.Log;
-
-import com.cooper.cooper.CustomToast;
-import com.cooper.cooper.MainMenu;
-import com.cooper.cooper.Utils;
 
 import org.json.JSONObject;
 
-import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.CookieManager;
-import java.net.HttpCookie;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.HashMap;
 
 import android.content.Context;
-import android.net.ConnectivityManager;
-import android.os.AsyncTask;
-import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
-import org.json.JSONObject;
-
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.DataOutputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -60,6 +32,7 @@ public class PostRequests extends AsyncTask<String, String, JSONObject> {
     private View view;
     static final String COOKIES_HEADER = "Set-Cookie";
     static android.webkit.CookieManager CookieManager = android.webkit.CookieManager.getInstance();
+    private HTTPRequestListener listener;
 
     public PostRequests(JSONObject postData, Context context) {
         if (postData != null) {
@@ -98,6 +71,7 @@ public class PostRequests extends AsyncTask<String, String, JSONObject> {
              String cookie_str = CookieManager.getCookie(strings[0]);
             if (CookieManager.hasCookies() && cookie_str != null) {
                 // While joining the Cookies, use ',' or ';' as needed. Most of the servers are using ';'
+                Log.d("cookies", cookie_str);
                 urlConnection.setRequestProperty("Cookie", cookie_str);
             }
 
@@ -131,7 +105,15 @@ public class PostRequests extends AsyncTask<String, String, JSONObject> {
                 Log.d("Response", response_body.toString());
                 in.close();
             } else {
-                response_body.append("Error, try later!");
+                BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getErrorStream()));
+                String inputLine;
+
+                while ((inputLine = in.readLine()) != null) {
+                    response_body.append(inputLine);
+                }
+                Log.d("Response", response_body.toString());
+                in.close();
+                response_body.append(" Error, try later!");
                 // Status code is not 200
                 // Do something to handle the error
             }
@@ -140,7 +122,9 @@ public class PostRequests extends AsyncTask<String, String, JSONObject> {
                 Map<String, List<String>> headerFields = urlConnection.getHeaderFields();
                 List<String> cookiesHeader = headerFields.get(COOKIES_HEADER);
                 if (cookiesHeader != null) {
+                    Log.d("hasCookie", "yes :v");
                     for (String cookie : cookiesHeader) {
+                        Log.d("cookie header", "cookie");
                         CookieManager.setCookie(strings[0], cookie);
                         //CookieManager.getCookieStore().add(null, HttpCookie.parse(cookie).get(0));
                     }
@@ -163,7 +147,7 @@ public class PostRequests extends AsyncTask<String, String, JSONObject> {
             Intent intent = new Intent(this.context,MainMenu.class);
             this.context.startActivity(intent);
         } else {
-            new CustomToast().Show_Toast(this.context, this.view, result);
+            new AlertToast().Show_Toast(this.context, this.view, result);
         }*/
         //Toast.makeText(this.context, result, Toast.LENGTH_SHORT).show();
     }

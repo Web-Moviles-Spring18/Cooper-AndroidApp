@@ -6,16 +6,17 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:padding="20dp"
-    tools:context="com.cooper.cooper.CreatePool"
-    android:background="@color/background_color">
+    tools:context="com.cooper.cooper.Menu.CreateCoops_Act"
+    android:background="@color/white">
 
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_mono_medium"
         android:gravity="center"
         android:padding="10dp"
-        android:text="CREATE POOL"
-        android:textColor="@color/white_greyish"
+        android:text="Create Coop"
+        android:textColor="@color/blue_strong"
         android:textSize="42sp"
         android:textStyle="bold" />
 
@@ -31,14 +32,14 @@
         android:inputType="textCapWords"
         android:padding="10dp"
         android:singleLine="true"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
+        android:textColor="@color/blue_greyish"
+        android:textColorHint="@color/blue_greyish"
         android:textSize="16sp" />
 
     <View
         android:layout_width="fill_parent"
         android:layout_height="1px"
-        android:background="@color/white_greyish" />
+        android:background="@color/blue_greyish" />
 
     <EditText
         android:id="@+id/pool_amount"
@@ -52,8 +53,8 @@
         android:inputType="number"
         android:padding="10dp"
         android:singleLine="true"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
+        android:textColor="@color/blue_greyish"
+        android:textColorHint="@color/blue_greyish"
         android:textSize="16sp" />
 
     <!--<View
@@ -81,7 +82,7 @@
     <View
         android:layout_width="fill_parent"
         android:layout_height="1px"
-        android:background="@color/white_greyish" />
+        android:background="@color/blue_strong" />
 
     <!--<EditText
         android:id="@+id/location"
@@ -100,10 +101,6 @@
         android:textColorHint="@color/white"
         android:textSize="16sp" />-->
 
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1px"
-        android:background="@color/white_greyish" />
 
     <EditText
         android:id="@+id/start_date"
@@ -117,14 +114,14 @@
         android:inputType="date"
         android:padding="10dp"
         android:singleLine="true"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
+        android:textColor="@color/blue_greyish"
+        android:textColorHint="@color/blue_greyish"
         android:textSize="16sp" />
 
     <View
         android:layout_width="fill_parent"
         android:layout_height="1px"
-        android:background="@color/white_greyish" />
+        android:background="@color/blue_strong" />
 
     <EditText
         android:id="@+id/end_date"
@@ -138,15 +135,15 @@
         android:inputType="date"
         android:padding="10dp"
         android:singleLine="true"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
+        android:textColor="@color/blue_greyish"
+        android:textColorHint="@color/blue_greyish"
         android:textSize="16sp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Payment Method"
-        android:textColor="@color/white"
+        android:textColor="@color/blue_greyish"
         android:textStyle="bold" />
 
     <RadioGroup
@@ -173,7 +170,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Pool Privacy"
-        android:textColor="@color/white"
+        android:textColor="@color/blue_greyish"
         android:textStyle="bold" />
 
     <RadioGroup
@@ -205,7 +202,7 @@
         android:onClick="createPool"
         android:padding="3dp"
         android:text="create pool"
-        android:textColor="@color/background_color"
+        android:textColor="@color/white"
         android:textSize="17sp"
         android:textStyle="bold" />
 

@@ -25,10 +25,15 @@ public class GetRequests extends AsyncTask<String, String, JSONObject> {
     private JSONObject getData;
     static final String COOKIES_HEADER = "Set-Cookie";
     static android.webkit.CookieManager CookieManager = android.webkit.CookieManager.getInstance();
+    private HTTPRequestListener listener;
+    private int statusCode;
+    public GetRequests() {
+    }
     public GetRequests(JSONObject getData) {
         this.getData = getData;
     }
-    public GetRequests() {
+    public GetRequests(HTTPRequestListener listener) {
+        this.listener = listener;
     }
 
     @Override
@@ -45,7 +50,7 @@ public class GetRequests extends AsyncTask<String, String, JSONObject> {
             }
             urlConnection.setRequestMethod("GET");
             urlConnection.connect();
-            int statusCode = urlConnection.getResponseCode();
+            this.statusCode = urlConnection.getResponseCode();
 
             // Read the input stream into a String
             InputStream inputStream = urlConnection.getInputStream();
@@ -60,7 +65,7 @@ public class GetRequests extends AsyncTask<String, String, JSONObject> {
                 buffer.append(line);
             }
             if (buffer.length() == 0) {
-                return null;
+                return new JSONObject();
             }
 
             JSONObject response = new JSONObject();
@@ -73,7 +78,15 @@ public class GetRequests extends AsyncTask<String, String, JSONObject> {
             Log.d("Error", e.toString());
             // If the code didn't successfully get the weather data, there's no point in attemping
             // to parse it.
-            return null;
+            return new JSONObject();
+        }
+    }
+
+    @Override
+    protected void onPostExecute(JSONObject jsonObject) {
+        super.onPostExecute(jsonObject);
+        if(this.listener != null) {
+            this.listener.requestDone(jsonObject, this.statusCode);
         }
     }
 }
