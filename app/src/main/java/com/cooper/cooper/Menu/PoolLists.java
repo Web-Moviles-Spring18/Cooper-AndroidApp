@@ -24,7 +24,7 @@ public class PoolLists extends AppCompatActivity implements AdapterView.OnItemCl
 
     }
 
-    private ArrayList<Pool> pool_list;
+    private JSONArray pool_list;
     private ListView listview_pools;
 
     @Override
@@ -33,19 +33,19 @@ public class PoolLists extends AppCompatActivity implements AdapterView.OnItemCl
         setContentView(R.layout.activity_pool_list);
 
 
-        this.pool_list = new ArrayList<>();
+        this.pool_list = new JSONArray();
 
         try {
                 GetRequests get_pool_list = new GetRequests(this);
                 get_pool_list.execute(Utils.URL + "/profile/pools");
 
                 JSONObject response = get_pool_list.get();
-                JSONArray pool_list = new JSONArray(response.getString("response"));
-                for (int i = 0; i < pool_list.length() ; i++) {
+                this.pool_list = new JSONArray(response.getString("response"));
+                /*for (int i = 0; i < pool_list.length() ; i++) {
                     JSONObject object = pool_list.getJSONObject(i);
                     this.makePool(object.getJSONObject("node"));
                     Log.d("Key", object.toString());
-                }
+                }*/
                 //JSONObject pool_list = new JSONObject(response.getString("response"));
 
                 Log.d("response get pool list", pool_list.toString());
@@ -82,7 +82,7 @@ public class PoolLists extends AppCompatActivity implements AdapterView.OnItemCl
             new_pool.setInvitation_code(invitation_code);
             new_pool.setEnd_date(ends);
             new_pool.setTotal(total);
-        this.pool_list.add(new_pool);
+        //this.pool_list.add(new_pool);
     }
     public void createPool(View v){
         Intent intent = new Intent(this, CreateCoops_Act.class);

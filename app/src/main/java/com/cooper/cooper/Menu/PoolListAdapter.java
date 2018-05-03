@@ -15,6 +15,9 @@ import android.widget.TextView;
 import com.cooper.cooper.Menu.Pool;
 import com.cooper.cooper.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -28,27 +31,42 @@ import java.util.concurrent.ExecutionException;
 
 public class PoolListAdapter extends BaseAdapter{
 
-    private ArrayList<Pool> pools;
+    //private ArrayList<Pool> pools;
+    private JSONArray pools;
     private Activity activity;
 
-    public PoolListAdapter(ArrayList<Pool> pools, Activity activity) {
+    public PoolListAdapter(JSONArray pools, Activity activity) {
         this.pools = pools;
         this.activity = activity;
     }
 
+    /*
+    JSONObject object = pool_list.getJSONObject(i);
+                this.makePool(object.getJSONObject("node"));
+     */
     @Override
     public int getCount() {
-        return this.pools.size();
+        return this.pools.length();
     }
 
     @Override
     public Object getItem(int i) {
-        return this.pools.get(i);
+        try {
+            return this.pools.getJSONObject(i).getJSONObject("node").get("_id");
+        } catch (JSONException e) {
+            return i;
+            //e.printStackTrace();
+        }
     }
 
     @Override
     public long getItemId(int i) {
-        return this.pools.get(i).getId();
+        try {
+            return (long) this.pools.getJSONObject(i).getJSONObject("node").get("_id");
+        } catch (JSONException e) {
+            return i;
+            //e.printStackTrace();
+        }
     }
 
     @Override
@@ -66,11 +84,22 @@ public class PoolListAdapter extends BaseAdapter{
         TextView amount = (TextView) view.findViewById(R.id.totalAmount);
         ImageView background = (ImageView) view.findViewById(R.id.background);
 
-        Pool currentPool = pools.get(i);
+        /*Pool currentPool = pools.get(i);
         name.setText(currentPool.getName());
-        amount.setText("$" + currentPool.getTotal());
+        amount.setText("$" + currentPool.getTotal());*/
         GetImageContent imageContent = new GetImageContent(this.activity);
-        imageContent.execute("https://i.imgur.com/UBbxasE.jpg");
+        String urlImage = "";
+        try {
+            name.setText(this.pools.getJSONObject(i).getJSONObject("node").getString("name"));
+            amount.setText("$" + this.pools.getJSONObject(i).getJSONObject("node").getString("total"));
+            urlImage = this.pools.getJSONObject(i).getJSONObject("node").getString("picture");
+        } catch (JSONException e) {
+            Log.d("AdpaterPool", e.toString());
+            //e.printStackTrace();
+        }
+        if(urlImage != null) {
+            imageContent.execute(urlImage);
+        }
 
         try {
             background.setImageDrawable(imageContent.get());

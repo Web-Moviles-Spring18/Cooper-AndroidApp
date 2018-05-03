@@ -39,6 +39,8 @@ public class Coops_List_Fragment extends Fragment implements AdapterView.OnItemC
     private FloatingActionButton fab1;
     private FragmentManager fragmentManager;
 
+    private JSONArray poolsData;
+
     public Coops_List_Fragment() {
         // Required empty public constructor
     }
@@ -57,7 +59,8 @@ public class Coops_List_Fragment extends Fragment implements AdapterView.OnItemC
         this.fab1 = view.findViewById(R.id.fab2);
         this.fab1.setOnClickListener(this);
 
-        this.pool_list = new ArrayList<>();
+        //this.pool_list = new ArrayList<>();
+        this.poolsData = new JSONArray();
         GetRequests get_pool_list = new GetRequests(this);
         get_pool_list.execute(Utils.URL + "/profile/pools");
 
@@ -65,11 +68,12 @@ public class Coops_List_Fragment extends Fragment implements AdapterView.OnItemC
         try {
             JSONObject response = get_pool_list.get();
             JSONArray pool_list = new JSONArray(response.getString("response"));
-            for (int i = 0; i < pool_list.length() ; i++) {
+            this.poolsData = pool_list;
+            /*for (int i = 0; i < pool_list.length() ; i++) {
                 JSONObject object = pool_list.getJSONObject(i);
                 this.makePool(object.getJSONObject("node"));
                 Log.d("Key", object.toString());
-            }
+            }*/
 
             //JSONObject pool_list = new JSONObject(response.getString("response"));
 
@@ -82,7 +86,8 @@ public class Coops_List_Fragment extends Fragment implements AdapterView.OnItemC
         this.listview_pools = (ListView) this.view.findViewById(R.id.coops_list);
 
 
-        PoolListAdapter poolAdapter = new PoolListAdapter(pool_list, this.getActivity());
+        PoolListAdapter poolAdapter = new PoolListAdapter(this.poolsData, this.getActivity());
+
         listview_pools.setAdapter(poolAdapter);
         listview_pools.setOnItemClickListener(this);
         // Inflate the layout for this fragment
@@ -100,7 +105,7 @@ public class Coops_List_Fragment extends Fragment implements AdapterView.OnItemC
         int id = node.getInt("_id");
         double total = node.getDouble("total");
 
-        Pool new_pool = new Pool();
+        /*Pool new_pool = new Pool();
         new_pool.setName(pool_name);
         new_pool.setPayment_method(payment);
         new_pool.setIs_private(isPrivate);
@@ -109,7 +114,7 @@ public class Coops_List_Fragment extends Fragment implements AdapterView.OnItemC
         new_pool.setInvitation_code(invitation_code);
         new_pool.setEnd_date(ends);
         new_pool.setTotal(total);
-        this.pool_list.add(new_pool);
+        this.pool_list.add(new_pool);*/
     }
     /*public void createPool(View v){
         Intent intent = new Intent(this, CreateCoops_Act.class);
