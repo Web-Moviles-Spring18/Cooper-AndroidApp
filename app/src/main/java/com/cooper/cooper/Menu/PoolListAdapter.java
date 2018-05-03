@@ -2,15 +2,25 @@ package com.cooper.cooper.Menu;
 
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cooper.cooper.Menu.Pool;
 import com.cooper.cooper.R;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by ASUS on 22/02/2018.
@@ -54,11 +64,24 @@ public class PoolListAdapter extends BaseAdapter{
 
         TextView name = (TextView) view.findViewById(R.id.title);
         TextView amount = (TextView) view.findViewById(R.id.totalAmount);
+        ImageView background = (ImageView) view.findViewById(R.id.background);
 
         Pool currentPool = pools.get(i);
         name.setText(currentPool.getName());
         amount.setText("$" + currentPool.getTotal());
+        GetImageContent imageContent = new GetImageContent(this.activity);
+        imageContent.execute("https://i.imgur.com/UBbxasE.jpg");
+
+        try {
+            background.setImageDrawable(imageContent.get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
 
         return view;
     }
+
 }
