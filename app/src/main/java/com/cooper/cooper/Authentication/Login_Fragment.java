@@ -1,9 +1,13 @@
 package com.cooper.cooper.Authentication;
 
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -30,12 +34,22 @@ import android.widget.TextView;
 
 import com.cooper.cooper.CustomToast.AlertToast;
 import com.cooper.cooper.CustomToast.SuccessToast;
+import com.cooper.cooper.MainActivity;
 import com.cooper.cooper.MainMenu;
 import com.cooper.cooper.R;
 import com.cooper.cooper.Utils;
 import com.cooper.cooper.http_requests.HTTPRequestListener;
 import com.cooper.cooper.http_requests.LoginRequest;
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Login_Fragment extends Fragment implements OnClickListener, HTTPRequestListener {
@@ -51,6 +65,14 @@ public class Login_Fragment extends Fragment implements OnClickListener, HTTPReq
     private FragmentManager fragmentManager;
     private SharedPreferences sharedPreferences;
 
+    CallbackManager callbackManager;
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -58,8 +80,58 @@ public class Login_Fragment extends Fragment implements OnClickListener, HTTPReq
         this.sharedPreferences = this.getActivity().getSharedPreferences("login", Context.MODE_PRIVATE);
         this.initViews();
         this.setListeners();
+
+        callbackManager = CallbackManager.Factory.create();
+
+        final LoginButton loginButton = (LoginButton)this.view.findViewById(R.id.login_button);
+        loginButton.setReadPermissions(Arrays.asList("public_profile","email","user_birthday", "user_friend"));
+
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+
+
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+
+                String accesstoken = loginResult.getAccessToken().getToken();
+                GraphRequest request  = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+                    @Override
+                    public void onCompleted(JSONObject object, GraphResponse response) {
+                        Log.d("response", response.toString());
+                        getData(object);
+                    }
+                });
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+
+            }
+        });
+
+        if(AccessToken.getCurrentAccessToken() != null){
+                Log.d("UserID: ", AccessToken.getCurrentAccessToken().getUserId());
+        }
+
         return this.view;
     }
+
+    private void getData(JSONObject object) {
+        try{
+            URL profile_picture = new URL("https://graph.facebook.com/"+object.getString("id")+"/picture?width=250&height=250");
+            Log.d("Email",object.getString("email"));
+            Log.d("Birthday",object.getString("birthday"));
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     // Initiate Views
     private void initViews() {
@@ -100,6 +172,8 @@ public class Login_Fragment extends Fragment implements OnClickListener, HTTPReq
                     }
                 });
     }
+
+
 
     @Override
     public void onClick(View v) {
