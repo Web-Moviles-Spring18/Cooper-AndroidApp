@@ -119,8 +119,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         switch (type) {
             case TYPE_INVITE:
                 // build with buttons accept and decline, and open pool view.
-                // TODO: decline and accept buttons.
-
                 Intent acceptIntent = new Intent(this, IntentServicePool.class);
                 acceptIntent.putExtra(IntentServicePool.EXTRA_POOL_ID, poolId);
                 acceptIntent.setAction(IntentServicePool.ACTION_ACCEPT);
@@ -131,6 +129,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 notificationBuilder.addAction(accept);
 
                 Intent declineIntent = new Intent(this, IntentServicePool.class);
+                declineIntent.putExtra(IntentServicePool.EXTRA_POOL_ID, poolId);
                 declineIntent.putExtra(IntentServicePool.EXTRA_POOL_ID, poolId);
                 declineIntent.setAction(IntentServicePool.ACTION_DECLINE);
 

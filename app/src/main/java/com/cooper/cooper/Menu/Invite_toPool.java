@@ -35,14 +35,14 @@ public class Invite_toPool extends AppCompatActivity implements HTTPRequestListe
     private ListView users_listview;
     private ArrayList<JSONObject> users;
 
-    private long poolId;
+    private String poolId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_layout_invite_to_pool);
 
         Intent intent = getIntent();
-        this.poolId = intent.getLongExtra("poolid", 23);
+        this.poolId = intent.getStringExtra("pool_id");
 
         this.userForSearch = (EditText) findViewById(R.id.searchUser);
         this.searchUser = (Button) findViewById(R.id.searchBtn);

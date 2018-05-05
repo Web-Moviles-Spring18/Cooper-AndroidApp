@@ -56,8 +56,7 @@ public class Coop_Detail_Act extends AppCompatActivity implements HTTPRequestLis
         this.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), Invite_toPool.class);
-                startActivity(intent);
+                goToInvitePool(view);
             }
         });
         Intent intent = getIntent();
@@ -100,8 +99,6 @@ public class Coop_Detail_Act extends AppCompatActivity implements HTTPRequestLis
                 member.put("paid", paid);
                 this.setMembers_listview(member);
             }
-            //JSONObject pool_list = new JSONObject(response.getString("response"));
-
             Log.d("response get pool list", pool_data.toString());
         } catch (Exception e) {
             Log.d("Get Pool List Error", e.toString());
@@ -139,7 +136,7 @@ public class Coop_Detail_Act extends AppCompatActivity implements HTTPRequestLis
     public void goToInvitePool(View view) {
         Log.d("go to invitation", this.pool_id+"");
         Intent i = new Intent(this, Invite_toPool.class);
-        i.putExtra("poolid",this.pool_id);
+        i.putExtra("pool_id",this.pool_id+"");
         this.startActivity(i);
     }
 

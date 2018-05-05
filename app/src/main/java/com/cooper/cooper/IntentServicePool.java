@@ -1,6 +1,7 @@
 package com.cooper.cooper;
 
 import android.app.IntentService;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.Context;
 import android.widget.Toast;
@@ -34,6 +35,9 @@ public class IntentServicePool extends IntentService {
                 handleActionDecline(param1);
             }
         }
+        NotificationManager notificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.cancel(0);
     }
 
     /**

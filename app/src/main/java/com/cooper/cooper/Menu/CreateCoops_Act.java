@@ -1,5 +1,6 @@
 package com.cooper.cooper.Menu;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +26,9 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 public class CreateCoops_Act extends AppCompatActivity {
 
@@ -35,6 +40,8 @@ public class CreateCoops_Act extends AppCompatActivity {
                         isCash,
                         isPrivate,
                         isPublic;
+
+    Calendar myCalendar = Calendar.getInstance();
 
     private String picutreBase64;
     private static int RESULT_LOAD_IMAGE = 1;
@@ -58,6 +65,59 @@ public class CreateCoops_Act extends AppCompatActivity {
         this.isCash = (RadioButton) findViewById(R.id.cash);
         this.isPrivate = (RadioButton) findViewById(R.id.is_private);
         this.isPublic = (RadioButton) findViewById(R.id.is_public);
+
+        final DatePickerDialog.OnDateSetListener date_picker_start = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                // TODO Auto-generated method stub
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                String myFormat = "MM/dd/yy"; //In which you need put here
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+                start_date.setText(sdf.format(myCalendar.getTime()));
+            }
+
+        };
+
+        start_date.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                new DatePickerDialog(CreateCoops_Act.this, date_picker_start, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
+        final DatePickerDialog.OnDateSetListener date_picker_end = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                String myFormat = "MM/dd/yy"; //In which you need put here
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+                end_date.setText(sdf.format(myCalendar.getTime()));
+            }
+        };
+
+        end_date.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                new DatePickerDialog(CreateCoops_Act.this, date_picker_end, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
     }
 
     public void createPool(View v) {
