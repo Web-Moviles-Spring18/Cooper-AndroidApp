@@ -46,6 +46,7 @@ public class Account_Fragment extends Fragment implements View.OnClickListener, 
     private SharedPreferences sharedPreferences;
     private static int RESULT_LOAD_IMAGE = 1;
 
+    private String urlImage;
     public Account_Fragment() {}
 
     @Override
@@ -84,6 +85,9 @@ public class Account_Fragment extends Fragment implements View.OnClickListener, 
             if(object.getInt("status_code") == HttpURLConnection.HTTP_OK) {
                 if(this.accountData.has("name")) {
                     this.nameUser.setText(this.accountData.getString("name"));
+                }
+                if(this.accountData.has("picture")) {
+                    this.urlImage = this.accountData.getString("picture");
                 }
                 this.emailUser.setText(this.accountData.getString("email"));
             } else {
@@ -134,6 +138,7 @@ public class Account_Fragment extends Fragment implements View.OnClickListener, 
                 break;
             case R.id.profilePicture:
                 Intent intent = new Intent(this.getActivity(), ProfilePicture_Account_Activity.class);
+                intent.putExtra("url", this.urlImage);
                 startActivity(intent);
                 break;
             case R.id.updatePasswordBtn:
