@@ -18,6 +18,7 @@ import com.cooper.cooper.CustomToast.SuccessToast;
 import com.cooper.cooper.MainActivity;
 import com.cooper.cooper.R;
 import com.cooper.cooper.Utils;
+import com.cooper.cooper.http_requests.DeleteRequest;
 import com.cooper.cooper.http_requests.GetRequests;
 import com.cooper.cooper.http_requests.HTTPRequestListener;
 import com.cooper.cooper.http_requests.LogoutRequest;
@@ -38,6 +39,7 @@ public class Account_Fragment extends Fragment implements View.OnClickListener, 
     private Button profilePicture;
     private Button updateProfile;
     private Button updatePassword;
+    private Button deleteAccount;
 
     private TextView nameUser, emailUser, password, confirmPasword;
 
@@ -65,6 +67,9 @@ public class Account_Fragment extends Fragment implements View.OnClickListener, 
         this.updateProfile.setOnClickListener(this);
         this.updatePassword = (Button) this.view.findViewById(R.id.updatePasswordBtn);
         this.updatePassword.setOnClickListener(this);
+
+        this.deleteAccount = (Button) this.view.findViewById(R.id.removeAccount);
+        this.deleteAccount.setOnClickListener(this);
 
         this.nameUser = (TextView) this.view.findViewById(R.id.account_name);
         this.emailUser = (TextView) this.view.findViewById(R.id.account_email);
@@ -130,6 +135,25 @@ public class Account_Fragment extends Fragment implements View.OnClickListener, 
         }
     }
 
+    public void deleteAccount() {
+        GetRequests deleteAccount = new GetRequests();
+        deleteAccount.execute(Utils.URL+"/account/delete");
+        try {
+            JSONObject response = deleteAccount.get();
+            int statusCode = response.getInt("status_code");
+            if(statusCode == 200) {
+                this.sharedPreferences.edit().putBoolean("isLogged", false).apply();
+                this.getActivity().finish();
+                Intent intent = new Intent(this.getActivity(), MainActivity.class);
+                this.startActivity(intent);
+                new SuccessToast().Show_Toast(this.getActivity(), this.view, response.getString("response"));
+            }
+        } catch(Exception error) {
+            error.printStackTrace();
+        }
+
+    }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -143,6 +167,9 @@ public class Account_Fragment extends Fragment implements View.OnClickListener, 
                 break;
             case R.id.updatePasswordBtn:
 
+                break;
+            case R.id.removeAccount:
+                this.deleteAccount();
                 break;
             case R.id.updateProfileBtn:
                 this.updateProfileData();

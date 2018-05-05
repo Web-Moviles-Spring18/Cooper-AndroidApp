@@ -95,7 +95,7 @@ public class PostRequests extends AsyncTask<String, String, JSONObject> {
 
             int statusCode = urlConnection.getResponseCode();
             StringBuilder response_body = new StringBuilder();
-            if (statusCode ==  200) {
+            if (statusCode ==  200 || statusCode ==  201) {
                 BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
                 String inputLine;
 
@@ -113,7 +113,7 @@ public class PostRequests extends AsyncTask<String, String, JSONObject> {
                 }
                 Log.d("Response", response_body.toString());
                 in.close();
-                response_body.append(" Error, try later!");
+                //response_body.append(" Error, try later!");
                 // Status code is not 200
                 // Do something to handle the error
             }

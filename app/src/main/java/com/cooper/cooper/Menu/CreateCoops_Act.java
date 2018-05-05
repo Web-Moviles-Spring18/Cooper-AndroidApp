@@ -91,7 +91,7 @@ public class CreateCoops_Act extends AppCompatActivity {
             JSONObject response = create_pool_request.get();
             int response_status_code = response.getInt("status_code");
             Log.d("status_code", response_status_code+"");
-            if(response_status_code == 200) {
+            if(response_status_code == 200 || response_status_code == 201) {
                 //this.finish();
                 Intent i = new Intent(this, MainMenu.class);
                 this.startActivity(i);
