@@ -143,7 +143,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             default:
                 // open pool view.
                 Intent poolIntent = new Intent(this, Coop_Detail_Act.class);
-                poolIntent.putExtra("pool", poolId);
+                poolIntent.putExtra("pool", Long.parseLong(poolId));
                 PendingIntent pIntent = PendingIntent.getActivity(this, 0, poolIntent, PendingIntent.FLAG_ONE_SHOT);
                 notificationBuilder.setContentIntent(pIntent);
                 break;
