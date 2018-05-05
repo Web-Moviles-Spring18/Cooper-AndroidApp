@@ -3,6 +3,7 @@ package com.cooper.cooper.Authentication;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -17,9 +18,11 @@ import android.widget.TextView;
 
 import com.cooper.cooper.CustomToast.AlertToast;
 import com.cooper.cooper.MainActivity;
+import com.cooper.cooper.MainMenu;
 import com.cooper.cooper.R;
 import com.cooper.cooper.Utils;
 import com.cooper.cooper.http_requests.PostRequests;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.json.JSONObject;
 
@@ -76,7 +79,8 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
                         int response_status_code = response.getInt("status_code");
                         Log.d("status_code", response_status_code+"");
                         if(response_status_code == 200 || response_status_code == 201) {
-                            new MainActivity().replaceLoginFragment();
+                            Intent intent = new Intent(this.getContext(), MainMenu.class);
+                            startActivity(intent);
                         } else {
                             new AlertToast().Show_Toast(getActivity(), v, response.getString("response"));
                         }
@@ -100,6 +104,7 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
         signup_json.put("email", this.emailId.getText().toString());
         signup_json.put("password", this.password.getText().toString());
         signup_json.put("confirmPassword", this.confirmPassword.getText().toString());
+        signup_json.put("fcmToken", FirebaseInstanceId.getInstance().getToken());
 
         return signup_json;
     }

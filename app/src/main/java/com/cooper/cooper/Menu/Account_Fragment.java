@@ -22,6 +22,7 @@ import com.cooper.cooper.http_requests.GetRequests;
 import com.cooper.cooper.http_requests.HTTPRequestListener;
 import com.cooper.cooper.http_requests.LogoutRequest;
 import com.cooper.cooper.http_requests.PostRequests;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.json.JSONObject;
 
@@ -110,6 +111,7 @@ public class Account_Fragment extends Fragment implements View.OnClickListener, 
             JSONObject postData = new JSONObject();
             postData.put("name", this.nameUser);
             postData.put("gender", "Male");
+            postData.put("fcmToken", FirebaseInstanceId.getInstance().getToken());
             PostRequests updateProfile = new PostRequests(postData);
             updateProfile.execute(Utils.URL.concat("/account/profile"));
 

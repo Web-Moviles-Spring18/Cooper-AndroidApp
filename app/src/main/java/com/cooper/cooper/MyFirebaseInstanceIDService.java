@@ -2,8 +2,15 @@ package com.cooper.cooper;
 
 import android.util.Log;
 
+import com.cooper.cooper.CustomToast.AlertToast;
+import com.cooper.cooper.CustomToast.SuccessToast;
+import com.cooper.cooper.http_requests.PostRequests;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
+
+import org.json.JSONObject;
+
+import java.net.HttpURLConnection;
 
 public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
     private static final String TAG = "MyFirebaseIIDService";
@@ -36,6 +43,13 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
      * @param token The new token.
      */
     private void sendRegistrationToServer(String token) {
-        // TODO: Implement this method to send token to your app server.
+        try {
+            JSONObject postData = new JSONObject();
+            postData.put("fcmToken", FirebaseInstanceId.getInstance().getToken());
+            PostRequests updateProfile = new PostRequests(postData);
+            updateProfile.execute(Utils.URL.concat("/account/profile"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

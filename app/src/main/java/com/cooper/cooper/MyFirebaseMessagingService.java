@@ -27,15 +27,16 @@ import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
-import com.firebase.jobdispatcher.Constraint;
-import com.firebase.jobdispatcher.FirebaseJobDispatcher;
-import com.firebase.jobdispatcher.GooglePlayDriver;
-import com.firebase.jobdispatcher.Job;
+import com.cooper.cooper.Menu.Coop_Detail_Act;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import java.util.Map;
+
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
+    private static final String TYPE_INVITE = "invite";
+    private static final String TYPE_PAYMENT_REQUEST = "paymentRequest";
     private static final String TAG = "MyFirebaseMsgService";
 
     /**
@@ -64,14 +65,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         if (remoteMessage.getData().size() > 0) {
             Log.d(TAG, "Message data payload: " + remoteMessage.getData());
 
-            if (/* Check if data needs to be processed by long running job */ true) {
-                // For long-running tasks (10 seconds or more) use Firebase Job Dispatcher.
-                scheduleJob();
-            } else {
-                // Handle message within 10 seconds
-                handleNow();
-            }
-
+            // For long-running tasks (10 seconds or more) use Firebase Job Dispatcher.
+            handleNow(remoteMessage);
         }
 
         // Check if message contains a notification payload.
@@ -85,47 +80,74 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     // [END receive_message]
 
     /**
-     * Schedule a job using FirebaseJobDispatcher.
-     */
-    private void scheduleJob() {
-        // [START dispatch_job]
-        FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(new GooglePlayDriver(this));
-        Job myJob = dispatcher.newJobBuilder()
-                .setService(MyJobService.class)
-                .setTag("my-job-tag")
-                .build();
-        dispatcher.schedule(myJob);
-        // [END dispatch_job]
-    }
-
-    /**
      * Handle time allotted to BroadcastReceivers.
      */
-    private void handleNow() {
+    private void handleNow(RemoteMessage payload) {
         Log.d(TAG, "Short lived task is done.");
+        try {
+            String title = payload.getNotification().getTitle();
+            String subject = payload.getNotification().getBody();
+            Map<String, String> data = payload.getData();
+            String poolId = data.get("poolId");
+            String type = data.get("type");
+
+            sendNotification(title, subject, type, poolId);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
      * Create and show a simple notification containing the received FCM message.
      *
-     * @param messageBody FCM message body received.
+     * @param title FCM title received.
+     * @param subject FCM message body received.
+     * @param type Cooper notification type received.
+     * @param poolId Cooper poolId received.
      */
-    private void sendNotification(String messageBody) {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
-                PendingIntent.FLAG_ONE_SHOT);
-
+    private void sendNotification(String title, String subject, String type, String poolId) {
         String channelId = getString(R.string.default_notification_channel_id);
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(this, channelId)
                         .setSmallIcon(R.drawable.cooper_icon)
-                        .setContentTitle("FCM Message")
-                        .setContentText(messageBody)
+                        .setContentTitle(title)
+                        .setContentText(subject)
                         .setAutoCancel(true)
-                        .setSound(defaultSoundUri)
-                        .setContentIntent(pendingIntent);
+                        .setSound(defaultSoundUri);
+
+        switch (type) {
+            case TYPE_INVITE:
+                // build with buttons accept and decline, and open pool view.
+                // TODO: decline and accept buttons.
+
+                Intent acceptIntent = new Intent(this, IntentServicePool.class);
+                acceptIntent.putExtra(IntentServicePool.EXTRA_POOL_ID, poolId);
+                acceptIntent.setAction(IntentServicePool.ACTION_ACCEPT);
+                PendingIntent acceptPIntent = PendingIntent.getService(this, 0, acceptIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                NotificationCompat.Action accept = new NotificationCompat.Action.Builder(
+                        R.mipmap.ic_cooper_launcher,
+                        "Accept", acceptPIntent).build();
+                notificationBuilder.addAction(accept);
+
+                Intent declineIntent = new Intent(this, IntentServicePool.class);
+                acceptIntent.putExtra(IntentServicePool.EXTRA_POOL_ID, poolId);
+                declineIntent.setAction(IntentServicePool.ACTION_DECLINE);
+
+                PendingIntent declinePIntent = PendingIntent.getService(this, 0, declineIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                NotificationCompat.Action decline = new NotificationCompat.Action.Builder(
+                        R.mipmap.ic_cooper_launcher,
+                        "Decline", declinePIntent).build();
+                notificationBuilder.addAction(decline);
+                break;
+            default:
+                // open pool view.
+                Intent poolIntent = new Intent(this, Coop_Detail_Act.class);
+                poolIntent.putExtra("pool", Long.parseLong(poolId));
+                PendingIntent pIntent = PendingIntent.getActivity(this, 0, poolIntent, PendingIntent.FLAG_ONE_SHOT);
+                notificationBuilder.setContentIntent(pIntent);
+                break;
+        }
 
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
