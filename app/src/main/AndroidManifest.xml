@@ -16,6 +16,17 @@
         android:roundIcon="@mipmap/ic_cooper_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/MyMaterialTheme">
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/cooper_icon" />
+        <!--
+             Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more.
+        -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,18 +40,33 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_pool_lists"
             android:theme="@style/FullscreenTheme" />
-
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
-
         <activity android:name=".Menu.CreateCoops_Act" />
         <activity android:name=".Menu.Coop_Detail_Act" />
         <activity android:name=".Menu.Invite_toPool" />
         <activity android:name=".Menu.ProfilePicture_Account_Activity" />
-        <activity android:name=".Menu.Join_Coop_Act"></activity>
+        <activity android:name=".Menu.Join_Coop_Act" />
         <activity android:name=".Menu.Chat_Act" />
-        <activity android:name=".Menu.ProfilePicture_Account_Activity"></activity>
+
+        <service
+            android:name=".MyFirebaseMessagingService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".MyFirebaseInstanceIDService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".MyJobService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

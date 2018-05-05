@@ -24,6 +24,7 @@
     <string name="back">BACK</string>
     <string name="facebook_app_id">419978235120867</string>
     <string name="fb_login_protocol_scheme">fb419978235120867</string>
+    <string name="default_notification_channel_id">Marco_es_puto</string>
 
     <string name="pool_name">Pool Name</string>
 
