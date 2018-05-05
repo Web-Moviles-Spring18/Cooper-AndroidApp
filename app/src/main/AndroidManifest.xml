@@ -37,7 +37,8 @@
         <activity android:name=".Menu.CreateCoops_Act" />
         <activity android:name=".Menu.Coop_Detail_Act" />
         <activity android:name=".Menu.Invite_toPool" />
-        <activity android:name=".Menu.Chat_Act" />
+        <activity android:name=".Menu.Chat_Act"
+            android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".Menu.ProfilePicture_Account_Activity"></activity>
     </application>
 

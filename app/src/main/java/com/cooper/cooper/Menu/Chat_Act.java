@@ -2,15 +2,12 @@ package com.cooper.cooper.Menu;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -20,30 +17,29 @@ import com.cooper.cooper.R;
 import com.cooper.cooper.Utils;
 import com.cooper.cooper.http_requests.GetRequests;
 import com.cooper.cooper.http_requests.HTTPRequestListener;
-import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class Chat_Act extends AppCompatActivity implements HTTPRequestListener {
 
     private static final int SIGN_IN_REQUEST_CODE = 666;
+    private static final int TYPE_ME = 69;
+    private static final int TYPE_THEM = 96;
     private FirebaseListAdapter<ChatMessage> adapter;
 
     private FirebaseAnalytics mFirebaseAnalytics;
     private FirebaseAuth mAuth;
 
     private String userName;
+    private String userEmail;
     private int userId;
 
     @Override
@@ -79,8 +75,6 @@ public class Chat_Act extends AppCompatActivity implements HTTPRequestListener {
                 Toast.LENGTH_LONG)
                 .show();*/
 
-        displayChatMessages();
-
         FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab);
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -97,17 +91,10 @@ public class Chat_Act extends AppCompatActivity implements HTTPRequestListener {
                 DatabaseReference push = ref.push();
                 String pushId = push.getKey();
                 push.setValue(new ChatMessage(userName,
+                                                userEmail,
                                                 pushId,
                                                 input.getText().toString(),
                                                 userId));
-                /*FirebaseDatabase.getInstance()
-                        .getReference()
-                        .push()
-                        .setValue(new ChatMessage(input.getText().toString(),
-                                FirebaseAuth.getInstance()
-                                        .getCurrentUser()
-                                        .getDisplayName())
-                        );*/
 
                 // Clear the input
                 input.setText("");
@@ -120,6 +107,7 @@ public class Chat_Act extends AppCompatActivity implements HTTPRequestListener {
         super.onStart();
     }
 
+    /*
     @Override
     protected  void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -141,7 +129,7 @@ public class Chat_Act extends AppCompatActivity implements HTTPRequestListener {
                 finish();
             }
         }
-    }
+    }*/
 
     /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -170,7 +158,7 @@ public class Chat_Act extends AppCompatActivity implements HTTPRequestListener {
     }*/
 
     private void displayChatMessages() {
-        RecyclerView listOfMessages = (RecyclerView) findViewById(R.id.list_of_messages);
+        final RecyclerView listOfMessages = (RecyclerView) findViewById(R.id.list_of_messages);
 
         Query query = FirebaseDatabase.getInstance()
                 .getReference()
@@ -186,13 +174,31 @@ public class Chat_Act extends AppCompatActivity implements HTTPRequestListener {
         FirebaseRecyclerAdapter<ChatMessage, FirebaseChatViewHolder> adapter = new FirebaseRecyclerAdapter<ChatMessage, FirebaseChatViewHolder>(options) {
 
             @Override
-            public FirebaseChatViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                // Create a new instance of the ViewHolder, in this case we are using a custom
-                // layout called R.layout.message for each item
-                View view = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.message, parent, false);
+            public int getItemViewType(int position) {
+                ChatMessage model = getItem(position);
+                if (model.getAuthorEmail().equals(userEmail)) {
+                    return TYPE_ME;
+                } else {
+                    return TYPE_THEM;
+                }
+            }
 
-                return new FirebaseChatViewHolder(view);
+            @Override
+            public FirebaseChatViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                if (viewType == TYPE_ME) {
+                    View view = LayoutInflater.from(parent.getContext())
+                            .inflate(R.layout.chat_my_message, parent, false);
+                    return new FirebaseChatViewHolder(view);
+                } else {
+                    View view = LayoutInflater.from(parent.getContext())
+                            .inflate(R.layout.chat_their_message, parent, false);
+                    return new FirebaseChatViewHolder(view);
+                }
+            }
+
+            @Override
+            public void onDataChanged() {
+                listOfMessages.smoothScrollToPosition(getItemCount());
             }
 
             @Override
@@ -202,10 +208,12 @@ public class Chat_Act extends AppCompatActivity implements HTTPRequestListener {
             }
         };
 
+        adapter.startListening();
         listOfMessages.setAdapter(adapter);
+        listOfMessages.smoothScrollToPosition(adapter.getItemCount());
         final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setStackFromEnd(true);
-        layoutManager.setReverseLayout(true);
+        //layoutManager.setReverseLayout(true);
 
         // auto scroll
         /*adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
@@ -217,7 +225,7 @@ public class Chat_Act extends AppCompatActivity implements HTTPRequestListener {
                         layoutManager.findLastCompletelyVisibleItemPosition();
                 // If the recycler view is initially being loaded or the
                 // user is at the bottom of the list, scroll to the bottom
-                // of the list to show the newly added message.
+                // of the list to show the newly added chat_my_message.
                 if (lastVisiblePosition == -1 ||
                         (positionStart >= (friendlyMessageCount - 1) &&
                                 lastVisiblePosition == (positionStart - 1))) {
@@ -227,7 +235,6 @@ public class Chat_Act extends AppCompatActivity implements HTTPRequestListener {
         });*/
 
         listOfMessages.setLayoutManager(layoutManager);
-        adapter.startListening();
     }
 
     @Override
@@ -237,8 +244,10 @@ public class Chat_Act extends AppCompatActivity implements HTTPRequestListener {
             try {
                 Log.d("json obtained: ", response.toString());
                 JSONObject userInfo = new JSONObject(response.getString("response"));
-                userName = userInfo.getString("email");
+                userName = userInfo.getString("name");
+                userEmail = userInfo.getString("email");
                 userId = userInfo.getInt("_id");
+                displayChatMessages();
             } catch (Exception e) {
                 Log.d("failed to fetch json", e.toString());
             }

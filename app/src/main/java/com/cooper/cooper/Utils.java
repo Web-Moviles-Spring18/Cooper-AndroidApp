@@ -19,5 +19,5 @@ public class Utils {
 
     public static final String PROPERTIES_FILE = "properties.xml";
 
-    public static final String URL = "http://167.99.98.101:3000";
+    public static final String URL = "https://cooperapp.me";
 }
