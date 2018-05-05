@@ -11,14 +11,16 @@ import java.util.Date;
 
 public class ChatMessage {
 
-    private String author;
+    private String authorName;
+    private String authorEmail;
     private String id;
     private String message;
     private String time;
     private int userid;
 
-    public ChatMessage(String author, String id, String message, int userid) {
-        this.author = author;
+    public ChatMessage(String authorName, String authorEmail, String id, String message, int userid) {
+        this.authorName = authorName;
+        this.authorEmail = authorEmail;
         this.id = id;
         this.message = message;
         this.userid = userid;
@@ -35,13 +37,17 @@ public class ChatMessage {
 
     }
 
-    public String getAuthor() {
-        return author;
+    public String getAuthorName() {
+        return authorName;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
     }
+
+    public String getAuthorEmail() { return authorEmail; }
+
+    public void setAuthorEmail(String authorEmail) { this.authorEmail = authorEmail; }
 
     public String getId() {
         return id;
