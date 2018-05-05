@@ -18,6 +18,17 @@
         android:textColor="@color/white"
         android:textStyle="bold" />
 
+    <Button
+        android:id="@+id/removeAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_above="@+id/account_name"
+        android:layout_alignEnd="@+id/updatePasswordBtn"
+        android:background="@android:color/holo_red_light"
+        android:text="Delete"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
+
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"

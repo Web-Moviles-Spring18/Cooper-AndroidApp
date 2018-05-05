@@ -131,7 +131,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 notificationBuilder.addAction(accept);
 
                 Intent declineIntent = new Intent(this, IntentServicePool.class);
-                acceptIntent.putExtra(IntentServicePool.EXTRA_POOL_ID, poolId);
+                declineIntent.putExtra(IntentServicePool.EXTRA_POOL_ID, poolId);
                 declineIntent.setAction(IntentServicePool.ACTION_DECLINE);
 
                 PendingIntent declinePIntent = PendingIntent.getService(this, 0, declineIntent, PendingIntent.FLAG_UPDATE_CURRENT);

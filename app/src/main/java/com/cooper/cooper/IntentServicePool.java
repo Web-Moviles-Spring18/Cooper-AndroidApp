@@ -42,7 +42,7 @@ public class IntentServicePool extends IntentService {
      */
     private void handleActionAccept(String poolId) {
         GetRequests request = new GetRequests();
-        request.execute(Utils.URL + "/pool/" + poolId + "/accept");
+        request.execute(Utils.URL + "/pool/accept/" + poolId);
     }
 
     /**
@@ -51,6 +51,6 @@ public class IntentServicePool extends IntentService {
      */
     private void handleActionDecline(String poolId) {
         GetRequests request = new GetRequests();
-        request.execute(Utils.URL + "/pool/" + poolId + "/decline");
+        request.execute(Utils.URL + "/pool/decline/" + poolId);
     }
 }

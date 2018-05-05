@@ -79,8 +79,8 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
                         int response_status_code = response.getInt("status_code");
                         Log.d("status_code", response_status_code+"");
                         if(response_status_code == 200 || response_status_code == 201) {
-                            Intent intent = new Intent(this.getContext(), MainMenu.class);
-                            startActivity(intent);
+                            Intent i = new Intent(this.getActivity(), MainMenu.class);
+                            startActivity(i);
                         } else {
                             new AlertToast().Show_Toast(getActivity(), v, response.getString("response"));
                         }
