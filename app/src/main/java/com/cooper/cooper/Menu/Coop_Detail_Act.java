@@ -136,6 +136,10 @@ public class Coop_Detail_Act extends AppCompatActivity implements HTTPRequestLis
     }
 
     public void poolConfigurations(View view) {
+        Intent intent = new Intent(this, Coop_Detail_Config_Act.class);
+        intent.putExtra("pool_name", this.pool_name.getText().toString());
+        intent.putExtra("pool_id", this.pool_id);
+        startActivity(intent);
         Toast.makeText(this, "Menu", Toast.LENGTH_SHORT).show();
     }
 

@@ -108,7 +108,7 @@ public class Account_Fragment extends Fragment implements View.OnClickListener, 
     public void updateProfileData() {
         try {
             JSONObject postData = new JSONObject();
-            postData.put("name", this.nameUser);
+            postData.put("name", this.nameUser.getText().toString());
             postData.put("gender", "Male");
             PostRequests updateProfile = new PostRequests(postData);
             updateProfile.execute(Utils.URL.concat("/account/profile"));

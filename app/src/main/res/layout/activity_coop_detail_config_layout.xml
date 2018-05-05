@@ -12,22 +12,23 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="26dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="23dp"
         android:fontFamily="@font/roboto_mono_medium"
         android:text="Pool Name"
         android:textColor="@color/blue_strong"
         android:textSize="24sp" />
 
     <Button
-        android:id="@+id/delete_pool"
+        android:id="@+id/deletePool"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/poolName"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="12dp"
+        android:layout_marginTop="32dp"
         android:background="@android:color/holo_red_light"
         android:ellipsize="middle"
+        android:onClick="deletePool"
         android:text="Delete"
         android:textColor="@color/white"
         android:textStyle="bold" />
