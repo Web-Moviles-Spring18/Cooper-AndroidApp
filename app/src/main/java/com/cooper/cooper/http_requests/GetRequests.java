@@ -51,22 +51,46 @@ public class GetRequests extends AsyncTask<String, String, JSONObject> {
             urlConnection.setRequestMethod("GET");
             urlConnection.connect();
             this.statusCode = urlConnection.getResponseCode();
+            BufferedReader reader;
+            StringBuilder buffer;
 
-            // Read the input stream into a String
-            InputStream inputStream = urlConnection.getInputStream();
-            StringBuilder buffer = new StringBuilder();
-            if (inputStream == null) {
-                return null;
-            }
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            if (statusCode ==  200) {
+                // Read the input stream into a String
+                InputStream inputStream = urlConnection.getInputStream();
+                buffer = new StringBuilder();
+                if (inputStream == null) {
+                    return null;
+                }
+                reader = new BufferedReader(new InputStreamReader(inputStream));
 
-            String line;
-            while ((line = reader.readLine()) != null) {
-                buffer.append(line);
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    buffer.append(line);
+                }
+                if (buffer.length() == 0) {
+                    //return new JSONObject("{'response':'Error'}");
+                    buffer.append("No Response Founded!");
+                }
+            } else {
+                // Read the input stream into a String
+                InputStream inputStream = urlConnection.getErrorStream();
+                buffer = new StringBuilder();
+                if (inputStream == null) {
+                    return null;
+                }
+                reader = new BufferedReader(new InputStreamReader(inputStream));
+
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    buffer.append(line);
+                }
+                if (buffer.length() == 0) {
+                    //return new JSONObject("{'response':'Error'}");
+                    buffer.append("No Response Founded!");
+                }
             }
-            if (buffer.length() == 0) {
-                return new JSONObject();
-            }
+
+
 
             JSONObject response = new JSONObject();
             response.put("status_code", statusCode);
@@ -75,10 +99,8 @@ public class GetRequests extends AsyncTask<String, String, JSONObject> {
             return response;
 
         } catch (Exception e) {
-            Log.d("Error", e.toString());
-            // If the code didn't successfully get the weather data, there's no point in attemping
-            // to parse it.
-            return new JSONObject();
+            e.printStackTrace();
+            return null;
         }
     }
 

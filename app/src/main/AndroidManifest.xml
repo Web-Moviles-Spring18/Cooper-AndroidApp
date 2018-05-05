@@ -45,8 +45,6 @@
         <activity android:name=".Menu.Invite_toPool" />
         <activity android:name=".Menu.ProfilePicture_Account_Activity" />
         <activity android:name=".Menu.Join_Coop_Act" />
-        <activity android:name=".Menu.Chat_Act" />
-
         <service
             android:name=".MyFirebaseMessagingService"
             android:enabled="true"
@@ -68,6 +66,11 @@
             android:exported="true"
             android:enabled="true"
             android:permission="android.permission.INTERNET"/>
+        <activity android:name=".Menu.Coop_Detail_Config_Act" />
+        <activity
+            android:name=".Menu.Chat_Act"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".Menu.MemberDetail_Act"></activity>
     </application>
 
 </manifest>

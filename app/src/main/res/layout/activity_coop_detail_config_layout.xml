@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.cooper.cooper.Menu.Coop_Detail_Config_Act">
+
+    <TextView
+        android:id="@+id/poolName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="23dp"
+        android:fontFamily="@font/roboto_mono_medium"
+        android:text="Pool Name"
+        android:textColor="@color/blue_strong"
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/notifyAll"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/deletePool"
+        android:layout_alignStart="@+id/deletePool"
+        android:layout_marginBottom="118dp"
+        android:background="@android:color/holo_blue_dark"
+        android:ellipsize="middle"
+        android:text="Notify All Members"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/deletePool"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="185dp"
+        android:background="@android:color/holo_red_light"
+        android:ellipsize="middle"
+        android:onClick="deletePool"
+        android:text="Delete"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
+
+
+</RelativeLayout>

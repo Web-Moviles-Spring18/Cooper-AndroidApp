@@ -109,7 +109,7 @@ public class Account_Fragment extends Fragment implements View.OnClickListener, 
     public void updateProfileData() {
         try {
             JSONObject postData = new JSONObject();
-            postData.put("name", this.nameUser);
+            postData.put("name", this.nameUser.getText().toString());
             postData.put("gender", "Male");
             postData.put("fcmToken", FirebaseInstanceId.getInstance().getToken());
             PostRequests updateProfile = new PostRequests(postData);

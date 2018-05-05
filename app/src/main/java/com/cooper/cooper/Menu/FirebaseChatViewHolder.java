@@ -30,7 +30,7 @@ public class FirebaseChatViewHolder extends RecyclerView.ViewHolder implements V
 
         // Set their text
         messageText.setText(message.getMessage());
-        messageUser.setText(message.getAuthor());
+        messageUser.setText(message.getAuthorName());
 
         // Format the date before showing it
         //messageTime.setText(DateFormat.format("dd-MM-yyyy (HH:mm:ss)",

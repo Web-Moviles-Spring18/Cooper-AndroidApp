@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.cooper.cooper.Menu.MemberDetail_Act">
+
+
+    <TextView
+        android:id="@+id/member_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/pending"
+        android:layout_below="@+id/coopName"
+        android:layout_marginTop="28dp"
+        android:text="Member Name"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/pending"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/paid"
+        android:layout_below="@+id/member_name"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="Amount Pending"
+        android:inputType="textPersonName"
+        android:textColor="@color/blue_greyish" />
+
+    <EditText
+        android:id="@+id/paid"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pending"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="13dp"
+        android:ems="10"
+        android:hint="Amount Paid"
+        android:inputType="textPersonName"
+        android:textColor="@color/blue_greyish" />
+
+    <TextView
+        android:id="@+id/coopName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/member_name"
+        android:layout_marginTop="40dp"
+        android:text="Coop Name"
+        android:textColor="@color/blue_strong"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/paid"
+        android:layout_below="@+id/paid"
+        android:layout_marginTop="52dp"
+        android:background="@drawable/loginbutton_selector"
+        android:onClick="updateMember"
+        android:padding="3dp"
+        android:text="Submit"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        android:textStyle="bold" />
+</RelativeLayout>

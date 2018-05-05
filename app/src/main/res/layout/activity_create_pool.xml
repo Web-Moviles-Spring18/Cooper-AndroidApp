@@ -15,7 +15,7 @@
         android:fontFamily="@font/roboto_mono_medium"
         android:gravity="center"
         android:padding="10dp"
-        android:text="Create Coop"
+        android:text="New Coop"
         android:textColor="@color/blue_strong"
         android:textSize="42sp"
         android:textStyle="bold" />
@@ -191,7 +191,24 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Public" />
+
     </RadioGroup>
+
+
+    <Button
+        android:id="@+id/uploadImage"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_weight="1"
+        android:background="@android:color/holo_orange_light"
+        android:onClick="uploadImage"
+        android:padding="2dp"
+        android:text="Upload Image"
+        android:textAllCaps="false"
+        android:textColor="@color/windowBackground"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/createPoolBtn"

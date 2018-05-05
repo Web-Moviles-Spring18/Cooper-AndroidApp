@@ -1,16 +1,20 @@
 package com.cooper.cooper.Menu;
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cooper.cooper.R;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by ASUS on 22/02/2018.
@@ -49,19 +53,34 @@ public class JoinCoopsAdapter extends BaseAdapter{
 
         TextView name = (TextView) view.findViewById(R.id.coopName);
         TextView amount = (TextView) view.findViewById(R.id.coopAmount);
+        ImageView imagePool = (ImageView) view.findViewById(R.id.imagePool);
+
+        /*Pool currentPool = pools.get(i);
+        name.setText(currentPool.getName());
+        amount.setText("$" + currentPool.getTotal());*/
+        GetImageContent imageContent = new GetImageContent(this.activity, 800, 600);
+        String urlImage = "";
+        try {
+            urlImage = this.coops.get(i).getString("picture");
+        } catch (JSONException e) {
+            Log.d("AdpaterPool", e.toString());
+            //e.printStackTrace();
+        }
+        if(urlImage != null) {
+            imageContent.execute(urlImage);
+        }
 
         try {
             if(this.coops.get(i).has("name")) {
                 name.setText(this.coops.get(i).getString("name"));
-            } else {
-                name.setText("Not Founded");
             }
-            amount.setText(this.coops.get(i).getDouble("total")+"");
-
-
+            String amountTxt = "$"+this.coops.get(i).getDouble("total");
+            amount.setText(amountTxt);
+            imagePool.setImageDrawable(imageContent.get());
         } catch (Exception e) {
-            name.setText("Not Founded");
+            e.printStackTrace();
         }
+
         return view;
     }
 }

@@ -13,8 +13,11 @@ import java.net.URL;
 public class GetImageContent extends AsyncTask<String, Void, Drawable> {
 
     private Activity context;
+    private int width, height;
 
-    public GetImageContent(Activity context) {
+    public GetImageContent(Activity context, int width, int height) {
+        this.width = width;
+        this.height = height;
         this.context = context;
     }
 
@@ -29,7 +32,7 @@ public class GetImageContent extends AsyncTask<String, Void, Drawable> {
             Drawable d = Drawable.createFromStream(is, "src name");
 
             Bitmap b = ((BitmapDrawable)d).getBitmap();
-            Bitmap bitmapResized = Bitmap.createScaledBitmap(b, 150, 50, false);
+            Bitmap bitmapResized = Bitmap.createScaledBitmap(b, this.width, this.height, false);
             return new BitmapDrawable(context.getResources(), bitmapResized);
 
         } catch (Exception e) {

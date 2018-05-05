@@ -56,8 +56,6 @@ public class Coops_List_Fragment extends Fragment implements AdapterView.OnItemC
         this.fab = view.findViewById(R.id.fab);
         this.fab.setOnClickListener(this);
 
-        this.fab1 = view.findViewById(R.id.fab2);
-        this.fab1.setOnClickListener(this);
 
         //this.pool_list = new ArrayList<>();
         this.poolsData = new JSONArray();
@@ -94,34 +92,6 @@ public class Coops_List_Fragment extends Fragment implements AdapterView.OnItemC
         return this.view;
     }
 
-    public void makePool(JSONObject node) throws Exception {
-        String pool_name = node.getString("name");
-        String pool_label = "";//node.getString("label");
-        String payment = node.getString("paymentMethod");
-        boolean isPrivate = node.getBoolean("private");
-        String currency = node.getString("currency");
-        String invitation_code = "";//node.getString("invite");
-        String ends = node.getString("ends");
-        int id = node.getInt("_id");
-        double total = node.getDouble("total");
-
-        /*Pool new_pool = new Pool();
-        new_pool.setName(pool_name);
-        new_pool.setPayment_method(payment);
-        new_pool.setIs_private(isPrivate);
-        new_pool.setId(id);
-        new_pool.setCurrency(currency);
-        new_pool.setInvitation_code(invitation_code);
-        new_pool.setEnd_date(ends);
-        new_pool.setTotal(total);
-        this.pool_list.add(new_pool);*/
-    }
-    /*public void createPool(View v){
-        Intent intent = new Intent(this, CreateCoops_Act.class);
-        this.startActivity(intent);
-    }*/
-
-
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         Log.d("ID pool", l+"");
@@ -138,33 +108,11 @@ public class Coops_List_Fragment extends Fragment implements AdapterView.OnItemC
                 Intent createCoop = new Intent(this.getActivity(), CreateCoops_Act.class);
                 this.startActivity(createCoop);
                 break;
-            case R.id.fab2:
-                Intent joinCoop = new Intent(this.getActivity(), Join_Coop_Act.class);
-                this.startActivity(joinCoop);
-                break;
         }
     }
 
     @Override
     public void requestDone(Object objectRes, int statusCode) {
-        /*if(objectRes instanceof JSONObject) {
-            JSONObject response = (JSONObject) objectRes;
-            try {
-                //JSONObject response = get_pool_list.get();
-                JSONArray pool_list = new JSONArray(response.getString("response"));
-                for (int i = 0; i < pool_list.length() ; i++) {
-                    JSONObject object = pool_list.getJSONObject(i);
-                    this.makePool(object.getJSONObject("node"));
-                    Log.d("Key", object.toString());
-                }
-
-                //JSONObject pool_list = new JSONObject(response.getString("response"));
-
-                Log.d("response get pool list", pool_list.toString());
-            } catch (Exception e) {
-                Log.wtf("Get Pool List Error", e.toString());
-            }
-        }*/
 
     }
 }

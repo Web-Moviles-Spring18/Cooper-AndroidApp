@@ -87,7 +87,7 @@ public class PoolListAdapter extends BaseAdapter{
         /*Pool currentPool = pools.get(i);
         name.setText(currentPool.getName());
         amount.setText("$" + currentPool.getTotal());*/
-        GetImageContent imageContent = new GetImageContent(this.activity);
+        GetImageContent imageContent = new GetImageContent(this.activity, 150, 50);
         String urlImage = "";
         try {
             name.setText(this.pools.getJSONObject(i).getJSONObject("node").getString("name"));

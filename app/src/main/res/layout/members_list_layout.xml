@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -9,12 +10,10 @@
         android:id="@+id/user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="11dp"
+        android:layout_alignBottom="@+id/imageView3"
+        android:layout_toEndOf="@+id/imageView3"
         android:hint="Member Name"
-        android:textSize="24sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         tools:layout_editor_absoluteX="25dp"
         tools:layout_editor_absoluteY="16dp" />
@@ -24,11 +23,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/user_name"
-        android:layout_marginEnd="27dp"
-        android:layout_marginTop="11dp"
+        android:layout_below="@+id/paid"
+        android:layout_marginEnd="24dp"
         android:hint="Pending"
-        android:text="Pending"
+        android:text="Pending $0.00"
         android:textColor="@android:color/holo_red_light"
         android:textStyle="bold" />
 
@@ -36,11 +34,19 @@
         android:id="@+id/paid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/user_name"
-        android:layout_alignBottom="@+id/user_name"
         android:layout_alignEnd="@+id/pending"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="16dp"
         android:hint="Paid"
         android:text="Paid $0.00"
         android:textColor="@android:color/holo_green_dark"
         android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/paid"
+        app:srcCompat="@drawable/user_blue" />
 </RelativeLayout>

@@ -8,7 +8,7 @@
     <Button
         android:id="@+id/logout"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
         android:layout_marginEnd="20dp"
@@ -94,8 +94,8 @@
 
     <Button
         android:id="@+id/updateProfileBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
         android:layout_alignStart="@+id/account_email"
         android:layout_below="@+id/account_email"
         android:layout_marginStart="27dp"
@@ -105,17 +105,16 @@
         android:text="Update Profile"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="14sp"
+        android:textSize="12sp"
         android:textStyle="bold" />
 
     <Button
         android:id="@+id/profilePicture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/updateProfileBtn"
-        android:layout_alignBottom="@+id/updateProfileBtn"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_above="@+id/passwordtitle"
         android:layout_alignEnd="@+id/logout"
-        android:layout_marginEnd="15dp"
+        android:layout_marginEnd="18dp"
         android:background="@color/blue_greyish"
         android:padding="3dp"
         android:text="Profile Picture"
