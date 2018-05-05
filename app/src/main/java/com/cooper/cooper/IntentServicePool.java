@@ -27,11 +27,10 @@ public class IntentServicePool extends IntentService {
     protected void onHandleIntent(Intent intent) {
         if (intent != null) {
             final String action = intent.getAction();
+            final String param1 = intent.getStringExtra(EXTRA_POOL_ID);
             if (ACTION_ACCEPT.equals(action)) {
-                final String param1 = intent.getStringExtra(EXTRA_POOL_ID);
                 handleActionAccept(param1);
             } else if (ACTION_DECLINE.equals(action)) {
-                final String param1 = intent.getStringExtra(EXTRA_POOL_ID);
                 handleActionDecline(param1);
             }
         }

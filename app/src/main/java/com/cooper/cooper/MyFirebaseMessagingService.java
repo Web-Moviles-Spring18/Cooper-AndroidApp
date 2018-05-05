@@ -88,7 +88,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             String title = payload.getNotification().getTitle();
             String subject = payload.getNotification().getBody();
             Map<String, String> data = payload.getData();
-            Long poolId = Long.parseLong(data.get("poolId"));
+            String poolId = data.get("poolId");
             String type = data.get("type");
 
             sendNotification(title, subject, type, poolId);
@@ -105,12 +105,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
      * @param type Cooper notification type received.
      * @param poolId Cooper poolId received.
      */
-    private void sendNotification(String title, String subject, String type, Long poolId) {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
-                PendingIntent.FLAG_ONE_SHOT);
-
+    private void sendNotification(String title, String subject, String type, String poolId) {
         String channelId = getString(R.string.default_notification_channel_id);
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder =
@@ -144,6 +139,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                         R.mipmap.ic_cooper_launcher,
                         "Decline", declinePIntent).build();
                 notificationBuilder.addAction(decline);
+                break;
             default:
                 // open pool view.
                 Intent poolIntent = new Intent(this, Coop_Detail_Act.class);
