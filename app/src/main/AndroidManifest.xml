@@ -64,9 +64,10 @@
             </intent-filter>
         </service>
         <service
-            android:name=".MyJobService"
+            android:name=".IntentServicePool"
+            android:exported="true"
             android:enabled="true"
-            android:exported="true"></service>
+            android:permission="android.permission.INTERNET"/>
     </application>
 
 </manifest>

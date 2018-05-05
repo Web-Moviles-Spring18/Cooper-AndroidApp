@@ -62,7 +62,7 @@ public class PoolListAdapter extends BaseAdapter{
     @Override
     public long getItemId(int i) {
         try {
-            return (long) this.pools.getJSONObject(i).getJSONObject("node").get("_id");
+            return Long.parseLong(this.pools.getJSONObject(i).getJSONObject("node").getString("_id"));
         } catch (JSONException e) {
             return i;
             //e.printStackTrace();
