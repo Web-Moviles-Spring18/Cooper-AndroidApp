@@ -101,7 +101,6 @@
         android:textColorHint="@color/white"
         android:textSize="16sp" />-->
 
-
     <EditText
         android:id="@+id/start_date"
         android:layout_width="fill_parent"
@@ -112,6 +111,7 @@
         android:gravity="center_vertical"
         android:hint="Start Date"
         android:inputType="date"
+        android:clickable="true"
         android:padding="10dp"
         android:singleLine="true"
         android:textColor="@color/blue_greyish"
@@ -133,6 +133,7 @@
         android:gravity="center_vertical"
         android:hint="End Date"
         android:inputType="date"
+        android:clickable="true"
         android:padding="10dp"
         android:singleLine="true"
         android:textColor="@color/blue_greyish"
