@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cooper.cooper.CustomToast.AlertToast;
 import com.cooper.cooper.CustomToast.SuccessToast;
@@ -132,6 +133,10 @@ public class Coop_Detail_Act extends AppCompatActivity implements HTTPRequestLis
         Intent i = new Intent(this, Invite_toPool.class);
         i.putExtra("poolid",this.pool_id);
         this.startActivity(i);
+    }
+
+    public void poolConfigurations(View view) {
+        Toast.makeText(this, "Menu", Toast.LENGTH_SHORT).show();
     }
 
     @Override

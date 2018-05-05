@@ -15,7 +15,7 @@
         android:fontFamily="@font/roboto_mono_medium"
         android:gravity="center"
         android:padding="10dp"
-        android:text="Create Coop"
+        android:text="New Coop"
         android:textColor="@color/blue_strong"
         android:textSize="42sp"
         android:textStyle="bold" />
