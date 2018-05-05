@@ -247,6 +247,8 @@ public class Chat_Act extends AppCompatActivity implements HTTPRequestListener {
                 userName = userInfo.getString("name");
                 userEmail = userInfo.getString("email");
                 userId = userInfo.getInt("_id");
+
+                Log.wtf("userName chat", userName);
                 displayChatMessages();
             } catch (Exception e) {
                 Log.d("failed to fetch json", e.toString());

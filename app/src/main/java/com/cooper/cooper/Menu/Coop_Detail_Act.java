@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -23,7 +24,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class Coop_Detail_Act extends AppCompatActivity implements HTTPRequestListener{
+public class Coop_Detail_Act extends AppCompatActivity implements HTTPRequestListener, AdapterView.OnItemClickListener {
 
 
     private TextView pool_name;
@@ -79,18 +80,24 @@ public class Coop_Detail_Act extends AppCompatActivity implements HTTPRequestLis
             /*
                 FIXME: this method, get from GET REQUEST, pending backend*/
 
-            double amount_each = this.tempAmount / pool_members.length();
+            //double amount_each = this.tempAmount / pool_members.length();
             for (int i = 0; i < pool_members.length() ; i++) {
                 JSONObject object = pool_members.getJSONObject(i);
                 JSONObject member = new JSONObject();
                 String name = "";
+                String email = "";
+                email = object.getJSONObject("node").getString("email");
                 if(object.getJSONObject("node").has("name")) {
                     name = object.getJSONObject("node").getString("name");
                 } else {
                     name = object.getJSONObject("node").getString("email");
                 }
+                String amount = object.getJSONObject("relation").getString("debt");
+                String paid = object.getJSONObject("relation").getString("paid");
                 member.put("name", name);
-                member.put("amount", amount_each);
+                member.put("amount", amount);
+                member.put("email", email);
+                member.put("paid", paid);
                 this.setMembers_listview(member);
             }
             //JSONObject pool_list = new JSONObject(response.getString("response"));
@@ -103,6 +110,7 @@ public class Coop_Detail_Act extends AppCompatActivity implements HTTPRequestLis
 
          MemberListAdapter membersAdapter = new MemberListAdapter(members, this);
         this.membersListView.setAdapter(membersAdapter);
+        this.membersListView.setOnItemClickListener(this);
     }
 
     public void setPoolData(JSONObject node) throws Exception {
@@ -152,4 +160,27 @@ public class Coop_Detail_Act extends AppCompatActivity implements HTTPRequestLis
         intent.putExtra("pool", this.pool_id);
         this.startActivity(intent);
     }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+        /*
+        this.memberEmailTxt = i.getStringExtra("email");
+        this.coopNameTxt = i.getStringExtra("coopName");
+        this.memberNameTxt = i.getStringExtra("name");
+        this.poolId = i.getLongExtra("poolid", 0);
+         */
+        try {
+            Intent userMember = new Intent(this, MemberDetail_Act.class);
+            userMember.putExtra("poolId", this.pool_id);
+            userMember.putExtra("coopName", this.pool_name.getText().toString());
+            userMember.putExtra("name", this.members.get(i).getString("name"));
+            userMember.putExtra("email", this.members.get(i).getString("email"));
+            startActivity(userMember);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
 }

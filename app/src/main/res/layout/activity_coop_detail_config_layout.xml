@@ -20,12 +20,25 @@
         android:textSize="24sp" />
 
     <Button
+        android:id="@+id/notifyAll"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/deletePool"
+        android:layout_alignStart="@+id/deletePool"
+        android:layout_marginBottom="118dp"
+        android:background="@android:color/holo_blue_dark"
+        android:ellipsize="middle"
+        android:text="Notify All Members"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
+
+    <Button
         android:id="@+id/deletePool"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/poolName"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="32dp"
+        android:layout_marginBottom="185dp"
         android:background="@android:color/holo_red_light"
         android:ellipsize="middle"
         android:onClick="deletePool"

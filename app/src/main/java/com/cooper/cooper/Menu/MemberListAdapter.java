@@ -49,12 +49,13 @@ public class MemberListAdapter extends BaseAdapter{
 
         TextView name = (TextView) view.findViewById(R.id.user_name);
         TextView amount = (TextView) view.findViewById(R.id.pending);
+        TextView paid = (TextView) view.findViewById(R.id.paid);
         try {
             if(this.members.get(i).has("name")) {
                 name.setText(this.members.get(i).getString("name")+"");
                 name.setTextSize(18);
             }
-
+            paid.setText("Paid $"+this.members.get(i).getString("paid"));
             amount.setText("Pending $"+this.members.get(i).getString("amount"));
         } catch (Exception e) {
             name.setText("Not Founded");
